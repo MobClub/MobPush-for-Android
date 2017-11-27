@@ -1,0 +1,59 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.3'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+
+ext{
+    compileSdkVersion = 25
+    buildToolsVersion = findBuildTools()
+
+    minSdkVersion = 15
+    targetSdkVersion = 25
+    versionCode = 1
+    versionName = "1.0.0"
+}
+
+String findBuildTools() {
+    def sdkDir = System.env.ANDROID_HOME;
+    if(sdkDir == null) {
+        def localProperties = new File(project.rootDir, "local.properties")
+        if (localProperties.exists()) {
+            Properties properties = new Properties()
+            localProperties.withInputStream {
+                instr->properties.load(instr)
+            }
+            sdkDir = properties.getProperty('sdk.dir')
+        }
+    }
+    if (sdkDir != null) {
+        def buildTools = new File(sdkDir, "build-tools")
+        if (buildTools.exists()) {
+            def tools = buildTools.list()
+            if (tools != null) {
+                Arrays.sort(tools)
+                return tools[tools.length - 1]
+            }
+        }
+    }
+    return "25.0.1"
+}

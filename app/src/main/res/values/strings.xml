@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">MobPush</string>
+    <string name="main_title">选择你想测试的推送类型</string>
+    <string name="item_inner">自定义消息测试</string>
+    <string name="item_notify">通知测试</string>
+    <string name="item_timing">定时通知测试</string>
+    <string name="inner_tip">点击测试按钮后，你将立即收到一条app内推送</string>
+    <string name="inner_input_hint">填写推送内容（不超过35个字）</string>
+    <string name="btn_test">点击测试</string>
+    <string name="notify_tip">点击测试按钮后，请在前台关闭App，5s后你将收到一条测试通知</string>
+    <string name="timing_tip">点击测试按钮后，请在前台关闭App，在你设定的时间到了时你将收到一条测试通知</string>
+    <string name="timing_choose_one">1分钟后</string>
+    <string name="timing_choose_two">2分钟后</string>
+    <string name="timing_choose_three">3分钟后</string>
+    <string name="timing_choose_four">4分钟后</string>
+    <string name="timing_choose_five">5分钟后</string>
+    <string name="toast_input_not_allowed_null">推送内容不能为空</string>
+    <string name="toast_send_success">发送成功</string>
+    <string name="toast_send_failed">发送失败，请检查网络重试</string>
+    <string name="push_pop_title">收到推送</string>
+    <string name="btn_i_known">我知道了</string>
+    <string name="mob_push_explain">此推送服务由MobPush提供</string>
+    <string name="toast_notify">推送发送成功！请在前台关闭app，5S后你将收到一条测试通知</string>
+    <string name="toast_timing">推送发送成功！请在前台关闭app，%s后你将收到一条测试通知</string>
+</resources>
