@@ -35,6 +35,7 @@ public class PageInner extends FakeActivity implements View.OnClickListener {
 
 		receiver = new MobPushReceiver() {
 			public void onCustomMessageReceive(final Context context, final MobPushCustomMessage message) {
+				//自定义消息回调
 				if (message != null) {
 					new PushPopWindow(activity, message.getContent()).show();
 				}
@@ -42,22 +43,22 @@ public class PageInner extends FakeActivity implements View.OnClickListener {
 
 			@Override
 			public void onNotifyMessageReceive(Context context, MobPushNotifyMessage message) {
-
+				//通知回调
 			}
 
 			@Override
 			public void onNotifyMessageOpenedReceive(Context context, MobPushNotifyMessage message) {
-
+				//默认通知栏通知的点击事件回调
 			}
 
 			@Override
 			public void onTagsCallback(Context context, String[] tags, int operation, int errorCode) {
-
+				//标签增删查操作回调
 			}
 
 			@Override
 			public void onAliasCallback(Context context, String alias, int operation, int errorCode) {
-
+				//别名增删查操作回调
 			}
 		};
 		MobPush.addPushReceiver(receiver);

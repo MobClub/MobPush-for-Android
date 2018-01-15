@@ -15,6 +15,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		findViewById(R.id.llInner).setOnClickListener(this);
 		findViewById(R.id.llNotify).setOnClickListener(this);
 		findViewById(R.id.llTiming).setOnClickListener(this);
+		findViewById(R.id.llLocal).setOnClickListener(this);
 	}
 
 	public void onClick(View v) {
@@ -28,6 +29,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			} break;
 			case R.id.llTiming: {
 				new PageTiming().show(this, null);
+			} break;
+			case R.id.llLocal: {
+				new PageLocal().show(this, null);
 			} break;
 		}
 

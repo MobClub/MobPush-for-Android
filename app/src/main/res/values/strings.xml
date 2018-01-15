@@ -4,11 +4,15 @@
     <string name="item_inner">自定义消息测试</string>
     <string name="item_notify">通知测试</string>
     <string name="item_timing">定时通知测试</string>
+    <string name="item_local">本地通知测试</string>
+    <string name="item_local_title">本地通知提醒测试</string>
     <string name="inner_tip">点击测试按钮后，你将立即收到一条app内推送</string>
     <string name="inner_input_hint">填写推送内容（不超过35个字）</string>
     <string name="btn_test">点击测试</string>
     <string name="notify_tip">点击测试按钮后，请在前台关闭App，5s后你将收到一条测试通知</string>
     <string name="timing_tip">点击测试按钮后，请在前台关闭App，在你设定的时间到了时你将收到一条测试通知</string>
+    <string name="local_tip">设置时间后点击测试按钮，请在前台关闭App，在你设定的时间到了时你将收到本地通知提醒</string>
+    <string name="local_tip_2">此时间只为方便测试功能，后台使用时不可设定1小时内的定时推送</string>
     <string name="timing_choose_one">1分钟后</string>
     <string name="timing_choose_two">2分钟后</string>
     <string name="timing_choose_three">3分钟后</string>

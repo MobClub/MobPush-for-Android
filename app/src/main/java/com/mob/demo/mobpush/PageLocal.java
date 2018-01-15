@@ -6,10 +6,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.mob.pushsdk.MobPushCallback;
+import com.mob.pushsdk.MobPush;
+import com.mob.pushsdk.MobPushLocalNotification;
 import com.mob.tools.FakeActivity;
 
-public class PageTiming extends FakeActivity implements View.OnClickListener {
+import java.util.Random;
+
+public class PageLocal extends FakeActivity implements View.OnClickListener {
 	private EditText etContent;
 	private TextView tvChooseOne;
 	private TextView tvChooseTwo;
@@ -25,10 +28,10 @@ public class PageTiming extends FakeActivity implements View.OnClickListener {
 
 	public void onCreate() {
 		super.onCreate();
-		activity.setContentView(R.layout.page_timing);
+		activity.setContentView(R.layout.page_local);
 
 		TextView tvTitle = findViewById(R.id.tvTitle);
-		tvTitle.setText(R.string.item_timing);
+		tvTitle.setText(R.string.item_local_title);
 		etContent = findViewById(R.id.etContent);
 
 		tvChooseOne = findViewById(R.id.tvChooseOne);
@@ -65,12 +68,14 @@ public class PageTiming extends FakeActivity implements View.OnClickListener {
 					Toast.makeText(getContext(), R.string.toast_input_not_allowed_null, Toast.LENGTH_SHORT).show();
 					return;
 				}
-				SimulateRequest.sendPush(3, content, currentChooseTime, new MobPushCallback<Boolean>() {
-					public void onCallback(Boolean result) {
-						Toast.makeText(getContext(), result ? activity.getString(R.string.toast_timing, currentChooseTime + "min")
-								: activity.getString(R.string.toast_send_failed), Toast.LENGTH_SHORT).show();
-					}
-				});
+				MobPushLocalNotification notification = new MobPushLocalNotification();
+				notification.setTitle(getContext().getString(R.string.item_local));
+				notification.setContent(content);
+//				notification.setVoice(false);//可设置不进行声音提醒，默认声音、振动、指示灯
+				notification.setNotificationId(new Random().nextInt());
+				notification.setTimestamp(currentChooseTime * 60 * 1000 + System.currentTimeMillis());
+				MobPush.addLocalNotification(notification);
+				Toast.makeText(getContext(), activity.getString(R.string.toast_timing, currentChooseTime + "min"), Toast.LENGTH_SHORT).show();
 			} break;
 			case R.id.tvChooseOne:
 			case R.id.tvChooseTwo:
