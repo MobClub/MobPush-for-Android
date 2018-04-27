@@ -9,7 +9,8 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_margin="20dp"
         android:lineSpacingMultiplier="1.2"
         android:text="@string/timing_tip"
@@ -19,13 +20,15 @@
     <EditText
         android:id="@+id/etContent"
         android:layout_width="match_parent"
-        android:layout_height="113dp"
+        android:layout_height="0dp"
+        android:layout_weight="2"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/bg_input"
         android:gravity="top"
         android:hint="@string/inner_input_hint"
         android:maxLines="100"
+        android:maxLength="35"
         android:textColor="#333333"
         android:textColorHint="#6e6f78"
         android:textSize="14sp"/>
@@ -34,7 +37,8 @@
     <TextView
         android:id="@+id/tvChooseOne"
         android:layout_width="match_parent"
-        android:layout_height="44dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
@@ -54,7 +58,8 @@
     <TextView
         android:id="@+id/tvChooseTwo"
         android:layout_width="match_parent"
-        android:layout_height="44dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:drawableRight="@drawable/ic_choose"
@@ -73,7 +78,8 @@
     <TextView
         android:id="@+id/tvChooseThree"
         android:layout_width="match_parent"
-        android:layout_height="44dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:drawableRight="@drawable/ic_choose"
@@ -92,7 +98,8 @@
     <TextView
         android:id="@+id/tvChooseFour"
         android:layout_width="match_parent"
-        android:layout_height="44dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:drawableRight="@drawable/ic_choose"
@@ -111,7 +118,8 @@
     <TextView
         android:id="@+id/tvChooseFive"
         android:layout_width="match_parent"
-        android:layout_height="44dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:drawableRight="@drawable/ic_choose"
@@ -129,7 +137,8 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_margin="20dp"
         android:lineSpacingMultiplier="1.2"
         android:text="@string/timing_tip"
@@ -139,10 +148,11 @@
     <Button
         android:id="@+id/btnTest"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/bg_btn_timing"
         android:text="@string/btn_test"
         android:textColor="#FFFFFF"

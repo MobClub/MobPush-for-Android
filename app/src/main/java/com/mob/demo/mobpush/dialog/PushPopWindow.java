@@ -1,4 +1,4 @@
-package com.mob.demo.mobpush;
+package com.mob.demo.mobpush.dialog;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+
+import com.mob.demo.mobpush.R;
 
 public class PushPopWindow extends PopupWindow {
 	public PushPopWindow(Context context, String message) {

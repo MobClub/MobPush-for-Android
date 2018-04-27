@@ -1,4 +1,4 @@
-package com.mob.demo.mobpush;
+package com.mob.demo.mobpush.req;
 
 import android.text.TextUtils;
 
@@ -16,6 +16,8 @@ public class SimulateRequest {
 			+ "1a58fa6ba2f22196493b3a4cbc283dcf749bf63679ee24d185de70c8dfe05605886c9b53e9f569082eabdf98c4fb0dcf07eb9bb3e647903489ff0b5d933bd004af5be"
 			+ "4a1022fdda41f347f1";
 
+	protected final static String SERVER_URL =  "http://sdk.push.mob.com/demo/push";
+
 	private static MobCommunicator mobCommunicator;
 
 	private synchronized static MobCommunicator getMobCommunicator() {
@@ -32,7 +34,7 @@ public class SimulateRequest {
 	 * @param text  模拟发送内容，500字节以内，UTF-8
 	 * @param space 仅对定时消息有效，单位分钟，默认1分钟
 	 */
-	public static void sendPush(final int type, final String text, final int space, final MobPushCallback<Boolean> callback) {
+	public static void sendPush(final int type, final String text, final int space, final String extras, final MobPushCallback<Boolean> callback) {
 		final String content;
 		if (text != null && text.length() > 35) {
 			content = text.substring(0, 35);
@@ -41,6 +43,7 @@ public class SimulateRequest {
 		}
 		MobPush.getRegistrationId(new MobPushCallback<String>() {
 			public void onCallback(String data) {
+//				System.out.println("注册id RegistrationId: " + data);
 				if (TextUtils.isEmpty(data)) {
 					if (callback != null) {
 						callback.onCallback(false);
@@ -54,7 +57,11 @@ public class SimulateRequest {
 				commonMap.put("content", content);
 				commonMap.put("space", space);
 				commonMap.put("appkey", MobSDK.getAppkey());
-				getMobCommunicator().request(commonMap, "http://sdk.push.mob.com/demo/push", false, new MobCommunicator.Callback<HashMap<String, Object>>() {
+				if(!TextUtils.isEmpty(extras)){
+					commonMap.put("extras", extras);
+				}
+//				System.out.println("demo请求参数：" + SERVER_URL + commonMap);
+				getMobCommunicator().request(commonMap, SERVER_URL, false, new MobCommunicator.Callback<HashMap<String, Object>>() {
 					public void onResultOk(HashMap<String, Object> data) {
 						if (callback != null) {
 							callback.onCallback(true);
@@ -71,6 +78,4 @@ public class SimulateRequest {
 			}
 		});
 	}
-
-
 }

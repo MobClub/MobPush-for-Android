@@ -25,6 +25,7 @@
         android:gravity="top"
         android:hint="@string/inner_input_hint"
         android:maxLines="100"
+        android:maxLength="35"
         android:textColor="#333333"
         android:textColorHint="#6e6f78"
         android:textSize="14sp"/>

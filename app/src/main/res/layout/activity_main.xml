@@ -1,155 +1,212 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:background="#ffffff"
+            android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/main_title"
+        android:textColor="#2A3B30"
+        android:textSize="20sp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="40dp"
-            android:layout_marginTop="50dp"
-            android:text="@string/main_title"
-            android:textColor="#2A3B30"
-            android:textSize="24sp"/>
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp">
+            android:id="@+id/llAppNotify"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_item_app_notify"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/llNotify"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_item_app_nitify"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="@drawable/bg_item_notify"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="77dp"
-                    android:layout_height="124dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="14dp"
-                    android:src="@drawable/ic_item_notify"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="center"
-                    android:text="@string/item_notify"
-                    android:textColor="#4e5d73"
-                    android:textSize="14sp"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/llTiming"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/bg_item_timing"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="77dp"
-                    android:layout_height="124dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="14dp"
-                    android:src="@drawable/ic_item_timing"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="center"
-                    android:text="@string/item_timing"
-                    android:textColor="#4e5d73"
-                    android:textSize="14sp"/>
-            </LinearLayout>
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="@string/item_app_notify"
+                android:textColor="#4E5D73"
+                android:textSize="12sp"/>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp">
+            android:id="@+id/llNotify"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_item_notify"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/llInner"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_item_notify"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="@drawable/bg_item_inner"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="77dp"
-                    android:layout_height="124dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="14dp"
-                    android:src="@drawable/ic_item_inner"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="center"
-                    android:text="@string/item_inner"
-                    android:textColor="#4e5d73"
-                    android:textSize="14sp"/>
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/llLocal"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/bg_item_local"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="77dp"
-                    android:layout_height="124dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="14dp"
-                    android:src="@drawable/ic_item_local"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="center"
-                    android:text="@string/item_local"
-                    android:textColor="#4e5d73"
-                    android:textSize="14sp"/>
-            </LinearLayout>
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="@string/item_notify"
+                android:textColor="#5E5239"
+                android:textSize="12sp"/>
         </LinearLayout>
     </LinearLayout>
 
-</ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <LinearLayout
+            android:id="@+id/llTiming"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_item_timing"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_item_timing"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="@string/item_timing"
+                android:textColor="#43744E"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/llLocal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_item_local"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_item_local"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="@string/item_local"
+                android:textColor="#313131"
+                android:textSize="12sp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <LinearLayout
+            android:id="@+id/llMedia"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_item_media"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_item_media"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="@string/item_media"
+                android:textColor="#4d4374"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"/>
+
+    </LinearLayout>
+
+</LinearLayout>

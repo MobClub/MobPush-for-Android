@@ -1,7 +1,5 @@
 apply plugin: 'com.android.application'
 apply from: '../buildCommon.gradle'
-
-// 添加插件
 apply plugin: 'com.mob.sdk'
 
 // 在MobSDK的扩展中注册MobPush的相关信息
@@ -9,5 +7,27 @@ MobSDK {
     appKey "moba6b6c6d6"
     appSecret "b89d2427a3bc7ad1aea1e1e8c1d36bf3"
 
-    MobPush {}
+    MobPush {
+        devInfo {
+            HUAWEI{
+                appId "100215127"
+            }
+//
+            MEIZU{
+                appId "112481"
+                appKey "03dd70b9be434446a7255c8586e1725a"
+            }
+
+            XIAOMI{
+                appId "2882303761517721670"
+                appKey "5671772162670"
+            }
+        }
+    }
+}
+
+dependencies {
+    compile 'com.huawei.android.hms:push:2.6.0.301'
+    compile 'com.meizu.flyme.internet:push-internal:3.6.5'
+    compile 'com.mob.push.plugins:xiaomi:3.6.1@aar'
 }

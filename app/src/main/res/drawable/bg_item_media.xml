@@ -5,8 +5,8 @@
             <corners android:radius="2dp"/>
             <gradient
                 android:angle="270"
-                android:endColor="#9AE2D5"
-                android:startColor="#9AE2D5"
+                android:endColor="#ebf2ff"
+                android:startColor="#ebf2ff"
                 android:type="linear"/>
         </shape>
     </item>
@@ -16,8 +16,8 @@
             <corners android:radius="2dp"/>
             <gradient
                 android:angle="270"
-                android:endColor="#9AE2D5"
-                android:startColor="#9AE2D5"
+                android:endColor="#ebf2ff"
+                android:startColor="#ebf2ff"
                 android:type="linear"/>
         </shape>
     </item>

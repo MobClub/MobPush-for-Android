@@ -3,10 +3,15 @@ package com.mob.demo.mobpush;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mob.demo.mobpush.dialog.DialogShell;
+import com.mob.demo.mobpush.dialog.PushPopWindow;
+import com.mob.demo.mobpush.req.SimulateRequest;
+import com.mob.demo.mobpush.utils.NetWorkHelper;
 import com.mob.pushsdk.MobPush;
 import com.mob.pushsdk.MobPushCallback;
 import com.mob.pushsdk.MobPushCustomMessage;
@@ -14,7 +19,7 @@ import com.mob.pushsdk.MobPushNotifyMessage;
 import com.mob.pushsdk.MobPushReceiver;
 import com.mob.tools.FakeActivity;
 
-public class PageInner extends FakeActivity implements View.OnClickListener {
+public class PageAppNotify extends FakeActivity implements View.OnClickListener {
 	private MobPushReceiver receiver;
 	private EditText etContent;
 
@@ -24,10 +29,11 @@ public class PageInner extends FakeActivity implements View.OnClickListener {
 
 	public void onCreate() {
 		super.onCreate();
-		activity.setContentView(R.layout.page_inner);
+		activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+		activity.setContentView(R.layout.page_app_notify);
 
 		TextView tvTitle = findViewById(R.id.tvTitle);
-		tvTitle.setText(R.string.item_inner);
+		tvTitle.setText(R.string.app_notify_title);
 		etContent = findViewById(R.id.etContent);
 
 		findViewById(R.id.ivBack).setOnClickListener(this);
@@ -35,6 +41,7 @@ public class PageInner extends FakeActivity implements View.OnClickListener {
 
 		receiver = new MobPushReceiver() {
 			public void onCustomMessageReceive(final Context context, final MobPushCustomMessage message) {
+				System.out.println("透传消息：" + message.toString());
 				//自定义消息回调
 				if (message != null) {
 					new PushPopWindow(activity, message.getContent()).show();
@@ -73,12 +80,19 @@ public class PageInner extends FakeActivity implements View.OnClickListener {
 			case R.id.btnTest: {
 				String content = etContent.getText().toString();
 				if (TextUtils.isEmpty(content)) {
-					Toast.makeText(getContext(), R.string.toast_input_not_allowed_null, Toast.LENGTH_SHORT).show();
-					return;
+					content = getContext().getResources().getString(R.string.inner_input_hint);
 				}
-				SimulateRequest.sendPush(2, content, 0, new MobPushCallback<Boolean>() {
+				Toast.makeText(getContext(), R.string.toast_send_success, Toast.LENGTH_SHORT).show();
+//				new DialogShell(getContext()).autoDismissDialog(R.string.toast_send_success, null, 2);
+				SimulateRequest.sendPush(2, content, 0, null, new MobPushCallback<Boolean>() {
 					public void onCallback(Boolean result) {
-						Toast.makeText(getContext(), result ? R.string.toast_send_success : R.string.toast_send_failed, Toast.LENGTH_SHORT).show();
+						if(!result) {
+							if (!NetWorkHelper.netWorkCanUse(null)) {
+								new DialogShell(getContext()).autoDismissDialog(R.string.error_network, null, 2);
+							} else {
+								new DialogShell(getContext()).autoDismissDialog(R.string.error_ukonw, null, 2);
+							}
+						}
 					}
 				});
 			} break;

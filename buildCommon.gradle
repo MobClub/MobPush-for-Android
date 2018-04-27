@@ -9,6 +9,30 @@ android {
         versionName rootProject.ext.versionName
     }
 
+    signingConfigs {
+        release {
+            keyAlias 'demokey.keystore'
+            keyPassword '123456'
+            storeFile file('demokey.keystore')
+            storePassword '123456'
+        }
+    }
+
+    buildTypes {
+        release {
+            zipAlignEnabled false
+            minifyEnabled true// 是否混淆
+            shrinkResources false// 是否去除无效的资源文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_6
         targetCompatibility JavaVersion.VERSION_1_6

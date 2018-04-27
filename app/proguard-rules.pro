@@ -18,6 +18,17 @@
 -keep public class * extends android.preference.Preference
 
 -keep class com.mob.**{*;}
+-dontwarn com.mob.**
+
+-keep class android.os.SystemProperties
+-dontwarn android.os.SystemProperties
+-keep class com.huawei.**{*;}
+-keep class com.meizu.**{*;}
+-keep class com.xiaomi.**{*;}
+
+-dontwarn com.huawei.**
+-dontwarn com.meizu.**
+-dontwarn com.xiaomi.**
 
 -keepclasseswithmembernames class * {
     native <methods>;
