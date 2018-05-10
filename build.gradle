@@ -4,9 +4,6 @@ buildscript {
     repositories {
         jcenter()
         maven {
-            url 'http://developer.huawei.com/repo/'
-        }
-        maven {
             url "http://mvn.mob.com/android"
         }
     }
