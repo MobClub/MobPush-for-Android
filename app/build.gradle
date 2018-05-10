@@ -25,9 +25,3 @@ MobSDK {
         }
     }
 }
-
-dependencies {
-    compile 'com.huawei.android.hms:push:2.6.0.301'
-    compile 'com.meizu.flyme.internet:push-internal:3.6.5'
-    compile 'com.mob.push.plugins:xiaomi:3.6.1@aar'
-}
