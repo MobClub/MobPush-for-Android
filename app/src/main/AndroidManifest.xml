@@ -18,6 +18,31 @@
         </activity>
 
         <activity android:name=".JumpActivity"/>
+		
+		<activity
+            android:name=".LinkOneActivity"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="com.mob.mobpush.linkone"
+                    android:scheme="mlink" />
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".LinkTwoActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="com.mob.mobpush.linktwo"
+                    android:scheme="mlink" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

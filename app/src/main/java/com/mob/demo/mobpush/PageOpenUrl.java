@@ -12,7 +12,6 @@ import com.mob.demo.mobpush.req.SimulateRequest;
 import com.mob.demo.mobpush.utils.NetWorkHelper;
 import com.mob.pushsdk.MobPushCallback;
 import com.mob.tools.FakeActivity;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 

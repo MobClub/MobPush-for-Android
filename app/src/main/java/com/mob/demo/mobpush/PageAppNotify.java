@@ -41,7 +41,6 @@ public class PageAppNotify extends FakeActivity implements View.OnClickListener 
 
 		receiver = new MobPushReceiver() {
 			public void onCustomMessageReceive(final Context context, final MobPushCustomMessage message) {
-				System.out.println("透传消息：" + message.toString());
 				//自定义消息回调
 				if (message != null) {
 					new PushPopWindow(activity, message.getContent()).show();

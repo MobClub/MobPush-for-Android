@@ -1,12 +1,10 @@
 package com.mob.demo.mobpush.req;
 
 import android.text.TextUtils;
-
 import com.mob.MobCommunicator;
 import com.mob.MobSDK;
 import com.mob.pushsdk.MobPush;
 import com.mob.pushsdk.MobPushCallback;
-
 import java.util.HashMap;
 
 public class SimulateRequest {
@@ -16,7 +14,7 @@ public class SimulateRequest {
 			+ "1a58fa6ba2f22196493b3a4cbc283dcf749bf63679ee24d185de70c8dfe05605886c9b53e9f569082eabdf98c4fb0dcf07eb9bb3e647903489ff0b5d933bd004af5be"
 			+ "4a1022fdda41f347f1";
 
-	protected final static String SERVER_URL =  "http://sdk.push.mob.com/demo/push";
+	protected final static String SERVER_URL =  "http://sdk.push.mob.com/demo/v2/push";
 
 	private static MobCommunicator mobCommunicator;
 
@@ -35,6 +33,19 @@ public class SimulateRequest {
 	 * @param space 仅对定时消息有效，单位分钟，默认1分钟
 	 */
 	public static void sendPush(final int type, final String text, final int space, final String extras, final MobPushCallback<Boolean> callback) {
+		sendPush(type, text, space, extras, null, null, callback);
+	}
+
+	/**
+	 * 模拟发送推送消息
+	 * @param type 消息类型：1、通知测试；2、内推测试；3、定时
+	 * @param text 模拟发送内容，500字节以内，UTF-8
+	 * @param space 仅对定时消息有效，单位分钟，默认1分钟
+	 * @param extras 推送消息附加数据
+	 * @param scheme 推送Link指定界面scheme
+	 * @param data 推送Link指定界面需传输的数据
+	 */
+	public static void sendPush(final int type, final String text, final int space, final String extras, final String scheme, final String data, final MobPushCallback<Boolean> callback) {
 		final String content;
 		if (text != null && text.length() > 35) {
 			content = text.substring(0, 35);
@@ -42,9 +53,8 @@ public class SimulateRequest {
 			content = text;
 		}
 		MobPush.getRegistrationId(new MobPushCallback<String>() {
-			public void onCallback(String data) {
-//				System.out.println("注册id RegistrationId: " + data);
-				if (TextUtils.isEmpty(data)) {
+			public void onCallback(String regId) {
+				if (TextUtils.isEmpty(regId)) {
 					if (callback != null) {
 						callback.onCallback(false);
 					}
@@ -52,7 +62,7 @@ public class SimulateRequest {
 				}
 				HashMap<String, Object> commonMap = new HashMap<String, Object>();
 				commonMap.put("plat", 1);
-				commonMap.put("registrationId", data);
+				commonMap.put("registrationId", regId);
 				commonMap.put("msgType", type);
 				commonMap.put("content", content);
 				commonMap.put("space", space);
@@ -60,7 +70,12 @@ public class SimulateRequest {
 				if(!TextUtils.isEmpty(extras)){
 					commonMap.put("extras", extras);
 				}
-//				System.out.println("demo请求参数：" + SERVER_URL + commonMap);
+				if(!TextUtils.isEmpty(scheme)){
+					commonMap.put("scheme", scheme);
+				}
+				if(!TextUtils.isEmpty(data)){
+					commonMap.put("data", data);
+				}
 				getMobCommunicator().request(commonMap, SERVER_URL, false, new MobCommunicator.Callback<HashMap<String, Object>>() {
 					public void onResultOk(HashMap<String, Object> data) {
 						if (callback != null) {
@@ -78,4 +93,5 @@ public class SimulateRequest {
 			}
 		});
 	}
+
 }

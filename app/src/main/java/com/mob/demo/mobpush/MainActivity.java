@@ -3,6 +3,7 @@ package com.mob.demo.mobpush;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -11,6 +12,9 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.View;
 
+//import com.google.android.gms.common.GoogleApiAvailability;
+//import com.google.android.gms.common.api.GoogleApi;
+//import com.google.firebase.messaging.FirebaseMessaging;
 import com.mob.demo.mobpush.web.WebViewPage;
 import com.mob.pushsdk.MobPush;
 import com.mob.pushsdk.MobPushCallback;
@@ -22,11 +26,11 @@ import java.util.HashMap;
 import java.util.Set;
 
 public class MainActivity extends Activity implements View.OnClickListener, Handler.Callback{
-
 	//这个参数不可以修改，从demo的接口发推送，只能接收这么一个字段;
 	// 如果是从后台的扩展参数传，则可以随意定义；
-	private final static String MOB_PUSH_DEMO_URL = "url";//跳转到指定页面的key（扩展字段里面）
-	private final static String MOB_PUSH_DEMO_INTENT = "intent";//跳转到指定页面的key（扩展字段里面）
+	private final static String MOB_PUSH_DEMO_URL = "url";
+	private final static String MOB_PUSH_DEMO_INTENT = "intent";
+	private final static String MOB_PUSH_DEMO_LINK = "mobpush_link_k";
 	private Handler handler;
 
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,20 +42,21 @@ public class MainActivity extends Activity implements View.OnClickListener, Hand
 		findViewById(R.id.llTiming).setOnClickListener(this);
 		findViewById(R.id.llLocal).setOnClickListener(this);
 		findViewById(R.id.llMedia).setOnClickListener(this);
+		findViewById(R.id.llOpenAct).setOnClickListener(this);
 
 		MobPush.addPushReceiver(new MobPushReceiver() {
 			@Override
 			public void onCustomMessageReceive(Context context, MobPushCustomMessage message) {
 				//接收自定义消息(透传)
-				System.out.println("MobPush onCustomMessageReceive:" + message.toString());
+				System.out.println("onCustomMessageReceive:" + message.toString());
 			}
 			@Override
 			public void onNotifyMessageReceive(Context context, MobPushNotifyMessage message) {
-				//接收通知消息
+				//接收通知消
 				System.out.println("MobPush onNotifyMessageReceive:" +  message.toString());
 				Message msg = new Message();
 				msg.what = 1;
-				msg.obj = "消息到达：" + message.toString();
+				msg.obj = "Message Receive:" + message.toString();
 				handler.sendMessage(msg);
 			}
 
@@ -61,28 +66,35 @@ public class MainActivity extends Activity implements View.OnClickListener, Hand
 				System.out.println("MobPush onNotifyMessageOpenedReceive:" + message.toString());
 				Message msg = new Message();
 				msg.what = 1;
-				msg.obj = "点击消息：" + message.toString();
+				msg.obj = "Click Message:" + message.toString();
 				handler.sendMessage(msg);
 			}
 			@Override
 			public void onTagsCallback(Context context, String[] tags, int operation, int errorCode) {
 				//接收tags的增改删查操作
-				System.out.println("MobPush onTagsCallback:" + operation + "  " + errorCode);
+				System.out.println("onTagsCallback:" + operation + "  " + errorCode);
 			}
 			@Override
 			public void onAliasCallback(Context context, String alias, int operation, int errorCode) {
 				//接收alias的增改删查操作
-				System.out.println("MobPush onAliasCallback:" +  alias + "  " + operation + "  " + errorCode);
+				System.out.println("onAliasCallback:" +  alias + "  " + operation + "  " + errorCode);
 			}
 		});
 		dealPushResponse(getIntent());
-		//获取注册id示例代码
-//		MobPush.getRegistrationId(new MobPushCallback<String>() {
-//			@Override
-//			public void onCallback(String data) {
-//				System.out.println(Thread.currentThread().getId() + " RegistrationId:" + data);
-//			}
-//		});
+		//获取注册id
+		MobPush.getRegistrationId(new MobPushCallback<String>() {
+			@Override
+			public void onCallback(String data) {
+				System.out.println(Thread.currentThread().getId() + " RegistrationId:" + data);
+			}
+		});
+
+		MobPush.setAlias("alias");
+		MobPush.addTags(new String[]{"tag1","tag2"});
+
+
+//		GoogleApiAvailability.getInstance().makeGooglePlayServicesAvailable(this);
+//		FirebaseMessaging.getInstance().subscribeToTopic("topic");
 	}
 
 	@Override
@@ -100,13 +112,20 @@ public class MainActivity extends Activity implements View.OnClickListener, Hand
 				Set<String> keySet = bundle.keySet();
 				for (String key : keySet) {
 					if (key.equals("msg")) {
-						MobPushNotifyMessage notifyMessage = (MobPushNotifyMessage) bundle.get(key);
+						//非推送link跳转，而是通过默认进入app入口页，通过msg获取传过来的数据
+						MobPushNotifyMessage notifyMessage = (MobPushNotifyMessage) bundle.getSerializable(key);
 						HashMap<String, String> params = notifyMessage.getExtrasMap();
 						if (params != null && params.containsKey(MOB_PUSH_DEMO_URL)) {
 							openUrl(params);
 						} else if(params != null && params.containsKey(MOB_PUSH_DEMO_INTENT)){
 							openPage(params);
+						} else if(params != null && params.containsKey(MOB_PUSH_DEMO_LINK)){
+							openAct(params);
 						}
+					} else if(key.equals("data")){
+						//通过推送link跳转获得数据可通过data取出传过来的数据，而不是用msg
+						String data = (String) bundle.get("data");
+						System.out.println("link data:"+data);
 					}
 				}
 			}
@@ -129,10 +148,6 @@ public class MainActivity extends Activity implements View.OnClickListener, Hand
 		webViewPage.show(this, null);
 	}
 
-	/**
-	 * 跳转到指定页面的示例
-	 * @param params
-	 */
 	private void openPage(HashMap<String, String> params){
 		//Test Code
 		Intent intent = new Intent(this, JumpActivity.class);
@@ -144,12 +159,21 @@ public class MainActivity extends Activity implements View.OnClickListener, Hand
 		String uri;
 		if(!TextUtils.isEmpty(params.get(MOB_PUSH_DEMO_INTENT))) {
 			uri = params.get(MOB_PUSH_DEMO_INTENT);
-			try{
+			try {
 				startActivity(Intent.parseUri(uri, 0));
 			} catch (Throwable t){
 				t.printStackTrace();
 			}
 		}
+	}
+
+	private void openAct(HashMap<String, String> params){
+		String uri = params.containsKey("mobpush_link_k") ? params.get("mobpush_link_k"):"";
+		if(TextUtils.isEmpty(uri)){
+			return;
+		}
+		Intent intent = new Intent(null, Uri.parse(uri));
+		startActivity(intent);
 	}
 
 	@Override
@@ -162,23 +186,27 @@ public class MainActivity extends Activity implements View.OnClickListener, Hand
 		switch (vId) {
 			case R.id.llAppNotify: {
 				new PageAppNotify().show(this, null);
-			}
-			break;
+			} break;
+
 			case R.id.llNotify: {
 				new PageNotify().show(this, null);
-			}
-			break;
+			} break;
+
 			case R.id.llTiming: {
 				new PageTiming().show(this, null);
-			}
-			break;
+			} break;
+
 			case R.id.llLocal: {
 				new PageLocal().show(this, null);
-			}
-			break;
+			} break;
+
 			case R.id.llMedia: {
 				new PageOpenUrl().show(this, null);
-			}
+			} break;
+
+			case R.id.llOpenAct: {
+				new PageOpenAct().show(this, null);
+			} break;
 		}
 	}
 
@@ -187,19 +215,16 @@ public class MainActivity extends Activity implements View.OnClickListener, Hand
 		if(msg.what == 1){
 			//当其它dialog未关闭的时候，再次显示dialog，会造成其他dialog无法dismiss的现象，建议使用toast
 //			if(PushDeviceHelper.getInstance().isNotificationEnabled()) {
-//				Toast.makeText(MainActivity.this, "回调信息\n" + (String) msg.obj, Toast.LENGTH_SHORT).show();
-//			} else {//当关闭通知栏后，toast是无法显示的
-//				new DialogShell(MainActivity.this).autoDismissDialog(0, "回调信息\n" + (String)msg.obj, 2);
+//				Toast.makeText(MainActivity.this, "回调信息\n" + (String) msg.OBJ, Toast.LENGTH_SHORT).show();
+//			} else {//当做比通知栏后，toast是无法显示的
+//				new DialogShell(MainActivity.this).autoDismissDialog(0, "回调信息\n" + (String)msg.OBJ, 2);
 //			}
-			System.out.println("回调信息\n" + (String)msg.obj);
+			System.out.println("Callback Data:" + msg.obj);
 		}
 		return false;
 	}
 
-	/**
-	 * 自定义通知栏
-	 */
 	private void diyNotify(){
-		MobPush.setCustomNotification(new CustomNotification());
+//		MobPush.setCustomNotification(new CustomNotification());
 	}
 }

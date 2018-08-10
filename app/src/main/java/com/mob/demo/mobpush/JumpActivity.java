@@ -47,7 +47,7 @@ public class JumpActivity extends Activity {
 	}
 
 	private void initData(Intent intent){
-		String data = "此处显示回传的数据：\n";
+		String data = "Callback Data:\n";
 		if(intent != null){
 			Bundle bundle = intent.getExtras();
 			if(bundle != null){

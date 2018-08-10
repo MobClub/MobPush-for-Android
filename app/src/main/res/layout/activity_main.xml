@@ -11,11 +11,9 @@
         android:layout_weight="1"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
         android:text="@string/main_title"
-        android:textColor="#2A3B30"
-        android:textSize="20sp"/>
+        android:textColor="@color/home_txt"
+        android:textSize="24sp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +28,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/bg_item_app_notify"
+            android:background="@drawable/bg_item_media"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
@@ -51,7 +49,7 @@
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:text="@string/item_app_notify"
-                android:textColor="#4E5D73"
+                android:textColor="@color/home_txt"
                 android:textSize="12sp"/>
         </LinearLayout>
 
@@ -61,7 +59,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_item_notify"
+            android:background="@drawable/bg_item_media"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
@@ -82,7 +80,7 @@
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:text="@string/item_notify"
-                android:textColor="#5E5239"
+                android:textColor="@color/home_txt"
                 android:textSize="12sp"/>
         </LinearLayout>
     </LinearLayout>
@@ -101,7 +99,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/bg_item_timing"
+            android:background="@drawable/bg_item_media"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
@@ -122,7 +120,7 @@
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:text="@string/item_timing"
-                android:textColor="#43744E"
+                android:textColor="@color/home_txt"
                 android:textSize="12sp"/>
         </LinearLayout>
 
@@ -133,7 +131,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_item_local"
+            android:background="@drawable/bg_item_media"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
@@ -154,7 +152,7 @@
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:text="@string/item_local"
-                android:textColor="#313131"
+                android:textColor="@color/home_txt"
                 android:textSize="12sp"/>
         </LinearLayout>
     </LinearLayout>
@@ -195,7 +193,7 @@
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:text="@string/item_media"
-                android:textColor="#4d4374"
+                android:textColor="@color/home_txt"
                 android:textSize="12sp"/>
         </LinearLayout>
 
@@ -203,9 +201,30 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:id="@+id/llOpenAct"
             android:layout_marginLeft="20dp"
             android:gravity="center_horizontal"
-            android:orientation="vertical"/>
+            android:background="@drawable/bg_item_media"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_item_open_act"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="@string/item_open_act"
+                android:textColor="@color/home_txt"
+                android:textSize="12sp"/>
+        </LinearLayout>
 
     </LinearLayout>
 

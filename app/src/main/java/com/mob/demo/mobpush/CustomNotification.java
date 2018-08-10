@@ -17,34 +17,36 @@ import com.mob.pushsdk.MobPushCustomNotification;
 import com.mob.pushsdk.MobPushNotifyMessage;
 
 /**
- * Created by jychen on 2018/4/4.
+ * Created by jychen on 2018/4/3.
  */
 
 public class CustomNotification implements MobPushCustomNotification {
 
-	private static final String ChannelId = "mobpush_notify";
-	private static final String ChannelName = "Channel";
+	//TODO 代码格式：常量名所有字母大写，单词间以下划线分割，待修改
+	private static final String CHANNELID = "mobpush_notify";
+	private static final String CHANNELNAME = "Channel";
 
 	@Override
-	public Notification getNotification(Context context, NotificationManager notificationManager, long when, String tickerText, String title, String content, int flag, int style, String styleContent, String[] inboxStyleContent, boolean voice, boolean shake, boolean light) {
+	public Notification getNotification(Context context, NotificationManager notificationManager, long when, String tickerText, String title,
+										String content, int flag, int style, String styleContent, String[] inboxStyleContent, boolean voice, boolean shake, boolean light) {
 		//TODO 此处设置点击要启动的app
 		PendingIntent pi = PendingIntent.getActivity(context, 1001, new Intent(context, MainActivity.class), flag);
 		//通知必须设置：小图标、标题、内容
 
 		Notification.Builder builder = null;
 		if (Build.VERSION.SDK_INT >= 26) {
-			//NotificationChannel 在26之后才有,不需要则可以注释掉
-			NotificationChannel notificationChannel = new NotificationChannel(ChannelId,
-					ChannelName, NotificationManager.IMPORTANCE_DEFAULT);
+			NotificationChannel notificationChannel = new NotificationChannel(CHANNELID,
+					CHANNELNAME, NotificationManager.IMPORTANCE_DEFAULT);
 			notificationChannel.enableLights(true); //是否在桌面icon右上角展示小红点
 			notificationChannel.setLightColor(Color.GREEN); //小红点颜色
 			notificationChannel.setShowBadge(true); //是否在久按桌面图标时显示此渠道的通知
 			notificationManager.createNotificationChannel(notificationChannel);
-			builder = new Notification.Builder(MobSDK.getContext(), ChannelId);
+			builder = new Notification.Builder(MobSDK.getContext(), CHANNELID);
 		} else{
 			builder = new Notification.Builder(MobSDK.getContext());
 		}
 
+//		Notification.Builder builder = new Notification.Builder(context);
 		if (android.os.Build.VERSION.SDK_INT >= 21) {
 			builder.setSmallIcon(R.mipmap.mobpush_notification_icon);
 		} else {
@@ -55,6 +57,7 @@ public class CustomNotification implements MobPushCustomNotification {
 		} else {
 			builder.setContentTitle(title);
 		}
+		builder.setContentText(content);
 		builder.setTicker(tickerText);
 		builder.setWhen(when);
 		if (Build.VERSION.SDK_INT >= 21) {

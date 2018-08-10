@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <include layout="@layout/title_bar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:lineSpacingMultiplier="1.2"
+        android:text="@string/open_act_tips_txt"
+        android:textColor="#686C7B"
+        android:textSize="12sp" />
+
+    <EditText
+        android:id="@+id/etContent"
+        android:layout_width="match_parent"
+        android:layout_height="113dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/bg_input"
+        android:gravity="top"
+        android:hint="@string/open_act_input_txt"
+        android:maxLength="35"
+        android:maxLines="100"
+        android:textColor="#686C7B"
+        android:textColorHint="#B8BCC9"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tvHome"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:drawableRight="@drawable/ic_choose"
+        android:gravity="center_vertical"
+        android:tag="1"
+        android:text="@string/link_home"
+        android:textColor="@color/tv_timing_color"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#E8E9F1" />
+
+    <TextView
+        android:id="@+id/tvAppPush"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_weight="1"
+        android:drawableRight="@null"
+        android:gravity="center_vertical"
+        android:tag="2"
+        android:text="@string/link_one"
+        android:textColor="@color/tv_timing_color"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#E8E9F1" />
+
+    <TextView
+        android:id="@+id/tvNotify"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_weight="1"
+        android:drawableRight="@null"
+        android:gravity="center_vertical"
+        android:tag="3"
+        android:text="@string/link_two"
+        android:textColor="@color/tv_timing_color"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#E8E9F1" />
+
+    <Button
+        android:id="@+id/btnTest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_btn_timing"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
+        android:text="@string/btn_test"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:gravity="center_vertical"
+        android:visibility="invisible" />
+
+</LinearLayout>
