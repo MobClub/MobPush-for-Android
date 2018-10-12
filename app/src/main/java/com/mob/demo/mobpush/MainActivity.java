@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -12,9 +13,6 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.View;
 
-//import com.google.android.gms.common.GoogleApiAvailability;
-//import com.google.android.gms.common.api.GoogleApi;
-//import com.google.firebase.messaging.FirebaseMessaging;
 import com.mob.demo.mobpush.web.WebViewPage;
 import com.mob.pushsdk.MobPush;
 import com.mob.pushsdk.MobPushCallback;
@@ -30,6 +28,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Hand
 	// 如果是从后台的扩展参数传，则可以随意定义；
 	private final static String MOB_PUSH_DEMO_URL = "url";
 	private final static String MOB_PUSH_DEMO_INTENT = "intent";
+	//推送跳转指定界面获取指定界面uri的固定key字段名:
 	private final static String MOB_PUSH_DEMO_LINK = "mobpush_link_k";
 	private Handler handler;
 
@@ -50,10 +49,11 @@ public class MainActivity extends Activity implements View.OnClickListener, Hand
 				//接收自定义消息(透传)
 				System.out.println("onCustomMessageReceive:" + message.toString());
 			}
+
 			@Override
 			public void onNotifyMessageReceive(Context context, MobPushNotifyMessage message) {
 				//接收通知消
-				System.out.println("MobPush onNotifyMessageReceive:" +  message.toString());
+				System.out.println("MobPush onNotifyMessageReceive:" + message.toString());
 				Message msg = new Message();
 				msg.what = 1;
 				msg.obj = "Message Receive:" + message.toString();
@@ -69,17 +69,20 @@ public class MainActivity extends Activity implements View.OnClickListener, Hand
 				msg.obj = "Click Message:" + message.toString();
 				handler.sendMessage(msg);
 			}
+
 			@Override
 			public void onTagsCallback(Context context, String[] tags, int operation, int errorCode) {
 				//接收tags的增改删查操作
 				System.out.println("onTagsCallback:" + operation + "  " + errorCode);
 			}
+
 			@Override
 			public void onAliasCallback(Context context, String alias, int operation, int errorCode) {
 				//接收alias的增改删查操作
-				System.out.println("onAliasCallback:" +  alias + "  " + operation + "  " + errorCode);
+				System.out.println("onAliasCallback:" + alias + "  " + operation + "  " + errorCode);
 			}
 		});
+
 		dealPushResponse(getIntent());
 		//获取注册id
 		MobPush.getRegistrationId(new MobPushCallback<String>() {
@@ -89,12 +92,16 @@ public class MainActivity extends Activity implements View.OnClickListener, Hand
 			}
 		});
 
-		MobPush.setAlias("alias");
-		MobPush.addTags(new String[]{"tag1","tag2"});
+		MobPush.setAlias("push");
 
+		MobPush.addTags(new String[]{"news", "car", "push"});
 
-//		GoogleApiAvailability.getInstance().makeGooglePlayServicesAvailable(this);
-//		FirebaseMessaging.getInstance().subscribeToTopic("topic");
+		if(Build.VERSION.SDK_INT >= 21){
+			MobPush.setNotifyIcon(R.mipmap.mobpush_notification_icon);
+		} else {
+			MobPush.setNotifyIcon(R.mipmap.ic_launcher);
+		}
+
 	}
 
 	@Override

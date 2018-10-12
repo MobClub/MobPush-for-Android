@@ -12,7 +12,7 @@ MobSDK {
             HUAWEI{
                 appId "100215127"
             }
-//
+
             MEIZU{
                 appId "112481"
                 appKey "03dd70b9be434446a7255c8586e1725a"
@@ -22,6 +22,13 @@ MobSDK {
                 appId "2882303761517721670"
                 appKey "5671772162670"
             }
+			
+			 FCM{
+                //设置默认推送通知显示图标
+                iconRes "@mipmap/ic_launcher"
+            }
         }
     }
 }
+
+apply plugin: 'com.google.gms.google-services'

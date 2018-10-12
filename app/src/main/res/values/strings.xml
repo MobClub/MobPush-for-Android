@@ -21,6 +21,7 @@
     <string name="open_url_tip">编辑完成后，点击测试按钮，你将立即收到一条推送消息，点击后可跳转至指定页面。</string>
     <string name="local_tip">设置时间后点击测试按钮，请在前台关闭App，在你设定的时间到了时你将收到本地通知提醒</string>
     <string name="local_tip_2">此时间只为方便测试功能，后台使用时不可设定1小时内的定时推送</string>
+    <string name="timing_choose_zero">立即</string>
     <string name="timing_choose_one">1分钟后</string>
     <string name="timing_choose_two">2分钟后</string>
     <string name="timing_choose_three">3分钟后</string>

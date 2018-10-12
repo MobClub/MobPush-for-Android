@@ -18,6 +18,7 @@ import java.util.Random;
 public class PageLocal extends FakeActivity implements View.OnClickListener {
 	private EditText etContent;
 	private TextView tvChooseOne;
+	private TextView tvChooseZero;
 	private TextView tvChooseTwo;
 	private TextView tvChooseThree;
 	private TextView tvChooseFour;
@@ -38,11 +39,13 @@ public class PageLocal extends FakeActivity implements View.OnClickListener {
 		tvTitle.setText(R.string.item_local_title);
 		etContent = findViewById(R.id.etContent);
 
+		tvChooseZero = findViewById(R.id.tvChooseZero);
 		tvChooseOne = findViewById(R.id.tvChooseOne);
 		tvChooseTwo = findViewById(R.id.tvChooseTwo);
 		tvChooseThree = findViewById(R.id.tvChooseThree);
 		tvChooseFour = findViewById(R.id.tvChooseFour);
 		tvChooseFive = findViewById(R.id.tvChooseFive);
+		tvChooseZero.setTag(0);
 		tvChooseOne.setTag(1);
 		tvChooseTwo.setTag(2);
 		tvChooseThree.setTag(3);
@@ -56,6 +59,7 @@ public class PageLocal extends FakeActivity implements View.OnClickListener {
 		findViewById(R.id.tvChooseThree).setOnClickListener(this);
 		findViewById(R.id.tvChooseFour).setOnClickListener(this);
 		findViewById(R.id.tvChooseFive).setOnClickListener(this);
+		findViewById(R.id.tvChooseZero).setOnClickListener(this);
 		tvChooseOne.performClick();
 	}
 
@@ -83,16 +87,19 @@ public class PageLocal extends FakeActivity implements View.OnClickListener {
 //				Toast.makeText(getContext(), activity.getString(R.string.toast_timing, currentChooseTime + "min"), Toast.LENGTH_SHORT).show();
 				new DialogShell(getContext()).autoDismissDialog(R.string.toast_timing, currentChooseTime + "min", 2);
 			} break;
+			case R.id.tvChooseZero:
 			case R.id.tvChooseOne:
 			case R.id.tvChooseTwo:
 			case R.id.tvChooseThree:
 			case R.id.tvChooseFour:
 			case R.id.tvChooseFive: {
+				tvChooseZero.setSelected(false);
 				tvChooseOne.setSelected(false);
 				tvChooseTwo.setSelected(false);
 				tvChooseThree.setSelected(false);
 				tvChooseFour.setSelected(false);
 				tvChooseFive.setSelected(false);
+				tvChooseZero.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
 				tvChooseOne.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
 				tvChooseTwo.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
 				tvChooseThree.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
