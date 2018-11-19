@@ -3,15 +3,12 @@
 buildscript {
     repositories {
         jcenter()
-        maven {
-            url "http://mvn.mob.com/android"
-        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.3'
         // 注册MobSDK
         classpath 'com.mob.sdk:MobSDK:+'
-		// 注册google services 用于集成FCM
+		// 注册google services 用于集成FCM，不集成FCM可不配置
 		classpath 'com.google.gms:google-services:4.0.0'
     }
 }
