@@ -21,7 +21,7 @@ import com.mob.demo.mobpush.utils.SizeHelper;
 import com.mob.tools.gui.RoundRectLayout;
 import com.mob.tools.utils.ResHelper;
 
-public class CommDialog extends Dialog implements OnClickListener {
+public class CommDialog extends Dialog implements OnClickListener{
 
 	private int dialogText;
 	private int dialogTitle;

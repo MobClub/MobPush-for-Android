@@ -13,7 +13,7 @@ public class NetWorkHelper {
 	 */
 	public static boolean netWorkCanUse(Throwable t){
 		// 获得网络状态管理器
-		try{
+		try {
 			ConnectivityManager connectivityManager = (ConnectivityManager) MobSDK.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 			if (connectivityManager == null) {
 				return false;

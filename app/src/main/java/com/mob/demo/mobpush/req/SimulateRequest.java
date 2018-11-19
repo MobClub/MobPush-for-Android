@@ -15,6 +15,7 @@ public class SimulateRequest {
 			+ "4a1022fdda41f347f1";
 
 	protected final static String SERVER_URL =  "http://sdk.push.mob.com/demo/v2/push";
+//	protected final static String SERVER_URL =  "http://10.21.141.19:8080/demo/v2/push";
 
 	private static MobCommunicator mobCommunicator;
 

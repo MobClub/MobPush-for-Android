@@ -159,15 +159,15 @@ public class DialogShell {
 		if(!TextUtils.isEmpty(split)){
 			dialog.setDialogTextSplit(split);
 		}
-		try{
+		try {
 			dialog.show();
-		}catch (Throwable t){}
+		} catch (Throwable t){}
 		new Handler().postDelayed(new Runnable() {
 			@Override
 			public void run() {
-				try{
+				try {
 					dialog.dismiss();
-				}catch (Throwable t){}
+				} catch (Throwable t){}
 
 			}
 		}, second * 1000);
