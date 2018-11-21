@@ -29,10 +29,10 @@ MobSDK {
             }
 			
 			//如想测试OPPO通道，请换成自己申请的OPPO应用信息，并修改对应包名，此处只做配置示范，不可以用来测试OPPO通道推送
-		OPPO{
-                appKey "b61Da76NM74gsG0o8C484g8GO"
-                appSecret "659C583033aE8Ffe45a0e867c70746Af"
-            }
+//		OPPO{
+//                appKey "申请的OPPO 对应appKey"
+//                appSecret "申请的OPPO 对应appSecret"
+//            }
         }
     }
 }
