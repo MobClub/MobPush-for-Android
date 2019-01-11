@@ -2,23 +2,41 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ff6600">
+    android:background="#fff">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:id="@+id/tv"
-        android:textColor="#fff"
+        android:textColor="#ff6600"
         android:gravity="center_horizontal"
         android:layout_centerInParent="true"
-        android:text="Weclome to MobPush" />
+        android:paddingTop="20dp"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:text="MobPush" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#999"
+        android:layout_below="@+id/tv"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:textSize="16sp"
+        android:text="快速集成推送服务" />
 
     <ImageView
         android:layout_centerHorizontal="true"
-        android:layout_width="80dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_above="@+id/tv"
-        android:layout_marginBottom="20dp"
-        android:layout_height="80dp"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@mipmap/big_icon"/>
 
+    <ImageView
+        android:layout_centerHorizontal="true"
+        android:layout_width="160dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_height="50dp"
+        android:src="@mipmap/mob"/>
 </RelativeLayout>
