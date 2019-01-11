@@ -68,13 +68,10 @@ public class PageTiming extends FakeActivity implements View.OnClickListener {
 				String content = etContent.getText().toString();
 				if (TextUtils.isEmpty(content)) {
 					Toast.makeText(getContext(), R.string.toast_input_not_allowed_null, Toast.LENGTH_SHORT).show();
-//					new DialogShell(getContext()).autoDismissDialog(R.string.toast_input_not_allowed_null, null, 2);
 					return;
 				}
 				SimulateRequest.sendPush(3, content, currentChooseTime, null, new MobPushCallback<Boolean>() {
 					public void onCallback(Boolean result) {
-//						Toast.makeText(getContext(), result ? activity.getString(R.string.toast_timing, currentChooseTime + "min")
-//								: activity.getString(R.string.toast_send_failed), Toast.LENGTH_SHORT).show();
 						if(result) {
 							new DialogShell(getContext()).autoDismissDialog(R.string.toast_timing, currentChooseTime + "min", 2);
 						} else if(!NetWorkHelper.netWorkCanUse(null)){

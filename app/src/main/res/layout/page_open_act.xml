@@ -31,21 +31,6 @@
         android:textColorHint="#B8BCC9"
         android:textSize="14sp" />
 
-    <TextView
-        android:id="@+id/tvHome"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_weight="1"
-        android:drawableRight="@drawable/ic_choose"
-        android:gravity="center_vertical"
-        android:tag="1"
-        android:text="@string/link_home"
-        android:textColor="@color/tv_timing_color"
-        android:textSize="14sp" />
-
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
@@ -60,9 +45,9 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_weight="1"
-        android:drawableRight="@null"
+        android:drawableRight="@drawable/ic_choose"
         android:gravity="center_vertical"
-        android:tag="2"
+        android:tag="1"
         android:text="@string/link_one"
         android:textColor="@color/tv_timing_color"
         android:textSize="14sp" />
@@ -83,7 +68,7 @@
         android:layout_weight="1"
         android:drawableRight="@null"
         android:gravity="center_vertical"
-        android:tag="3"
+        android:tag="2"
         android:text="@string/link_two"
         android:textColor="@color/tv_timing_color"
         android:textSize="14sp" />

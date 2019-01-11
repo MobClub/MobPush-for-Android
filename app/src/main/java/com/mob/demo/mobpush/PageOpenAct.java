@@ -23,10 +23,6 @@ public class PageOpenAct extends FakeActivity implements View.OnClickListener {
 	 */
 	private int openType = 1;
 	/**
-	 * Link首页
-	 */
-	private TextView tvHome;
-	/**
 	 * Link指定页面1
 	 */
 	private TextView tvLinkOne;
@@ -50,11 +46,9 @@ public class PageOpenAct extends FakeActivity implements View.OnClickListener {
 		findViewById(R.id.ivBack).setOnClickListener(this);
 		findViewById(R.id.btnTest).setOnClickListener(this);
 
-		tvHome = findViewById(R.id.tvHome);
 		tvLinkOne = findViewById(R.id.tvAppPush);
 		tvLinkTwo = findViewById(R.id.tvNotify);
 
-		tvHome.setOnClickListener(this);
 		tvLinkOne.setOnClickListener(this);
 		tvLinkTwo.setOnClickListener(this);
 	}
@@ -66,7 +60,6 @@ public class PageOpenAct extends FakeActivity implements View.OnClickListener {
 				finish();
 			}
 			break;
-			case R.id.tvHome:
 			case R.id.tvAppPush:
 			case R.id.tvNotify: {
 				initView();
@@ -84,16 +77,12 @@ public class PageOpenAct extends FakeActivity implements View.OnClickListener {
 				//指定跳转界面的Uri
 				String openScheme = null;
 				switch (openType) {
-					case 2: {
+					case 1: {
 						openScheme = "mlink://com.mob.mobpush.linkone";
 					}
 					break;
-					case 3: {
+					case 2: {
 						openScheme = "mlink://com.mob.mobpush.linktwo";
-					}
-					break;
-					case 1: {
-						openScheme = "mlink://com.mob.mobpush.linkhome";
 					}
 					break;
 				}
@@ -103,7 +92,7 @@ public class PageOpenAct extends FakeActivity implements View.OnClickListener {
 				try {
 					data.put("product", "MobPush");
 					data.put("company", "Mob");
-					data.put("target", openType == 1 ? "LinkHome" : (openType == 2 ? "LinkOne" : "LinkTwo"));
+					data.put("target", openType == 1 ? "LinkOne" : "LinkTwo");
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -126,7 +115,6 @@ public class PageOpenAct extends FakeActivity implements View.OnClickListener {
 	}
 
 	private void initView() {
-		tvHome.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, 0, 0);
 		tvLinkOne.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, 0, 0);
 		tvLinkTwo.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, 0, 0);
 	}

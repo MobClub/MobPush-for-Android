@@ -42,12 +42,10 @@ public class PageNotify extends FakeActivity implements View.OnClickListener {
 				final String content = etContent.getText().toString();
 				if (TextUtils.isEmpty(content)) {
 					Toast.makeText(getContext(), R.string.toast_input_not_allowed_null, Toast.LENGTH_SHORT).show();
-//					new DialogShell(getContext()).autoDismissDialog(R.string.toast_input_not_allowed_null, null, 2);
 					return;
 				}
 				SimulateRequest.sendPush(1, content, 0, null, new MobPushCallback<Boolean>() {
 					public void onCallback(Boolean result) {
-//						Toast.makeText(getContext(), result ? R.string.toast_notify : R.string.toast_send_failed, Toast.LENGTH_SHORT).show();
 						if(result) {
 							new DialogShell(getContext()).autoDismissDialog(R.string.toast_notify,null,  2);
 						} else if(!NetWorkHelper.netWorkCanUse(null)){

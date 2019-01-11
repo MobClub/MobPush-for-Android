@@ -2,8 +2,11 @@ package com.mob.demo.mobpush.web;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.net.http.SslError;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -11,6 +14,8 @@ import android.view.View;
 import android.view.Window;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
@@ -18,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mob.demo.mobpush.utils.SizeHelper;
 import com.mob.tools.FakeActivity;
@@ -48,13 +54,33 @@ public class WebViewPage extends FakeActivity {
 		this.url = url;
 	}
 
-	private void initPage(Activity activity) {
+	private void initPage(final Activity activity) {
 		initView();
+
 		webView.setWebViewClient(new WebViewClient() {
 			public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
 				handler.proceed();
 			}
 
+			@Override
+			public boolean shouldOverrideUrlLoading(WebView view, String url1) {
+				System.out.println(">>>>>>>>>>>>>>>>>url:"+url1);
+				if (url1 == null) return false;
+				try{
+					if(!url1.startsWith("http://") && !url1.startsWith("https://")){
+						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url1));
+						startActivity(intent);
+						return false;
+					}
+				}catch (Exception e){
+//					//防止crash (如果手机上没有安装处理某个scheme开头的url的APP, 会导致crash)
+					return true;//没有安装该app时，返回true，表示拦截自定义链接，但不跳转，避免弹出上面的错误页面
+				}
+
+				//返回值是true的时候控制去WebView打开，为false调用系统浏览器或第三方浏览器
+				view.loadUrl(url1);
+				return true;
+			}
 			public void onPageFinished(WebView view, String url) {
 				super.onPageFinished(view, url);
 				if (view != null) {

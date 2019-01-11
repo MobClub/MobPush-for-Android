@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MobPushdd16</string>
+    <string name="app_name">MobPush</string>
     <string name="main_title">选择你想测试的推送类型</string>
     <string name="item_app_notify">App内推送</string>
     <string name="app_notify_title">App内推送测试</string>
@@ -9,6 +9,7 @@
     <string name="timing_title">定时通知测试</string>
     <string name="item_local">本地通知</string>
     <string name="item_media">通过推送打开指定链接页面</string>
+    <string name="item_setting">设置</string>
     <string name="item_local_title">本地通知提醒测试</string>
     <string name="inner_tip">点击测试按钮后，你将立即收到一条app内推送</string>
     <string name="inner_input_hint">填写推送内容（不超过35个字）</string>
@@ -50,10 +51,16 @@
     <string name="link_one">推送打开指定界面1</string>
     <string name="link_two">推送打开指定界面2</string>
     <string name="notify">通知测试页面</string>
-    <string name="toast_notify_open_act">推送发送成功！请在前台关闭app，1min后你将收到一条能跳转至应用内指定页面的通知</string>
+    <string name="toast_notify_open_act">推送发送成功！你将收到一条能跳转至应用内指定页面的通知</string>
     <string name="link_one_title">Link打开指定界面1</string>
     <string name="link_two_title">Link打开指定界面2</string>
     <string name="link_ok">Link Activity Success.</string>
     <string name="notification_show_close">通知权限已关闭</string>
+
+    <string name="setting_title">设置自定义通知</string>
+    <string name="set_diy_notification">设置自定义通知</string>
+    <string name="remove_diy_notification">移除自定义通知</string>
+    <string name="set_forground_hidden_notification">设置前台时不显示推送</string>
+    <string name="set_forground_show_notification">设置前台时显示推送</string>
 
 </resources>

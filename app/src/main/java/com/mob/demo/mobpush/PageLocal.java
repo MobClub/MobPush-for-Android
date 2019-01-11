@@ -73,7 +73,6 @@ public class PageLocal extends FakeActivity implements View.OnClickListener {
 				String content = etContent.getText().toString();
 				if (TextUtils.isEmpty(content)) {
 					Toast.makeText(getContext(), R.string.toast_input_not_allowed_null, Toast.LENGTH_SHORT).show();
-//					new DialogShell(getContext()).autoDismissDialog(R.string.toast_input_not_allowed_null, null, 2);
 					return;
 				}
 				MobPushLocalNotification notification = new MobPushLocalNotification();
@@ -84,7 +83,6 @@ public class PageLocal extends FakeActivity implements View.OnClickListener {
 				notification.setNotificationId(new Random().nextInt());
 				notification.setTimestamp(currentChooseTime * 60 * 1000 + System.currentTimeMillis());
 				MobPush.addLocalNotification(notification);
-//				Toast.makeText(getContext(), activity.getString(R.string.toast_timing, currentChooseTime + "min"), Toast.LENGTH_SHORT).show();
 				new DialogShell(getContext()).autoDismissDialog(R.string.toast_timing, currentChooseTime + "min", 2);
 			} break;
 			case R.id.tvChooseZero:

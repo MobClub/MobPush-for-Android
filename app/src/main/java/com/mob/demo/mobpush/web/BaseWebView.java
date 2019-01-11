@@ -33,9 +33,14 @@ public class BaseWebView extends WebView {
 		settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
 		settings.setUseWideViewPort(true);
 		settings.setJavaScriptEnabled(true);
+		settings.setDomStorageEnabled(true);
 		setVerticalScrollBarEnabled(false);
 		setHorizontalScrollBarEnabled(false);
-		settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+		settings.setAppCacheEnabled(false);
+//		settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+		}
 	}
 
 }

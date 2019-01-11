@@ -13,24 +13,23 @@ import android.os.Build;
 import android.text.TextUtils;
 
 import com.mob.MobSDK;
-import com.mob.pushsdk.MobPushCustomNotification;
+import com.mob.pushsdk.MobPushTailorNotification;
 import com.mob.pushsdk.MobPushNotifyMessage;
 
-/**
- * Created by jychen on 2018/4/3.
- */
-
-public class CustomNotification implements MobPushCustomNotification {
+public class CustomNotification extends MobPushTailorNotification {
 
 	//TODO 代码格式：常量名所有字母大写，单词间以下划线分割，待修改
 	private static final String CHANNELID = "mobpush_notify";
 	private static final String CHANNELNAME = "Channel";
 
 	@Override
-	public Notification getNotification(Context context, NotificationManager notificationManager, long when, String tickerText, String title,
-										String content, int flag, int style, String styleContent, String[] inboxStyleContent, boolean voice, boolean shake, boolean light) {
+	public Notification getNotification(Context context, NotificationManager notificationManager, MobPushNotifyMessage mobPushNotifyMessage) {
+		if(mobPushNotifyMessage == null){
+			return null;
+		}
+
 		//TODO 此处设置点击要启动的app
-		PendingIntent pi = PendingIntent.getActivity(context, 1001, new Intent(context, MainActivity.class), flag);
+		PendingIntent pi = PendingIntent.getActivity(context, 1001, new Intent(context, MainActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
 		//通知必须设置：小图标、标题、内容
 
 		Notification.Builder builder = null;
@@ -46,27 +45,34 @@ public class CustomNotification implements MobPushCustomNotification {
 			builder = new Notification.Builder(MobSDK.getContext());
 		}
 
-//		Notification.Builder builder = new Notification.Builder(context);
-		if (android.os.Build.VERSION.SDK_INT >= 21) {
-			builder.setSmallIcon(R.mipmap.mobpush_notification_icon);
+		if (Build.VERSION.SDK_INT >= 21) {
+			builder.setSmallIcon(R.mipmap.default_ic_launcher);
 		} else {
 			builder.setSmallIcon(R.mipmap.ic_launcher);
 		}
+
+		String title = mobPushNotifyMessage.getTitle();
+		String content = mobPushNotifyMessage.getContent();
+
 		if (TextUtils.isEmpty(title)) {
-			builder.setContentTitle(context.getString(R.string.app_name));
+			builder.setContentTitle(context.getString(R.string.app_name) + " DIY");
 		} else {
-			builder.setContentTitle(title);
+			builder.setContentTitle(title + " DIY");
 		}
 		builder.setContentText(content);
-		builder.setTicker(tickerText);
-		builder.setWhen(when);
+		builder.setTicker(title);
+		builder.setWhen(mobPushNotifyMessage.getTimestamp());
 		if (Build.VERSION.SDK_INT >= 21) {
-			builder.setColor(0x00000000);
+			builder.setColor(0xff000000);
 		}
 		builder.setContentIntent(pi);
 		builder.setAutoCancel(true);
+
+		boolean voice = mobPushNotifyMessage.isVoice();
+		boolean shake = mobPushNotifyMessage.isShake();
+		boolean light = mobPushNotifyMessage.isLight();
 		if (voice && shake && light) {
-			builder.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS);
+			builder.setDefaults(Notification.DEFAULT_ALL);
 		} else if (voice && shake) {
 			builder.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE);
 		} else if (voice && light) {
@@ -86,7 +92,10 @@ public class CustomNotification implements MobPushCustomNotification {
 				builder.setLights(0, 0, 0);
 			}
 		}
-		if (android.os.Build.VERSION.SDK_INT >= 16) {
+		int style = mobPushNotifyMessage.getStyle();
+		String styleContent = mobPushNotifyMessage.getStyleContent();
+		String[] inboxStyleContent = mobPushNotifyMessage.getInboxStyleContent();
+		if (Build.VERSION.SDK_INT >= 16) {
 			if (style == MobPushNotifyMessage.STYLE_BIG_TEXT) {    //大段文本
 				Notification.BigTextStyle textStyle = new Notification.BigTextStyle();
 				textStyle.setBigContentTitle(title).bigText(styleContent);
@@ -113,8 +122,5 @@ public class CustomNotification implements MobPushCustomNotification {
 			}
 		}
 		return Build.VERSION.SDK_INT >= 16 ? builder.build() : builder.getNotification();
-//						return getNotification(builder);
 	}
-
-
 }

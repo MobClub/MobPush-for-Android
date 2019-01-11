@@ -82,7 +82,6 @@ public class PageAppNotify extends FakeActivity implements View.OnClickListener 
 					content = getContext().getResources().getString(R.string.inner_input_hint);
 				}
 				Toast.makeText(getContext(), R.string.toast_send_success, Toast.LENGTH_SHORT).show();
-//				new DialogShell(getContext()).autoDismissDialog(R.string.toast_send_success, null, 2);
 				SimulateRequest.sendPush(2, content, 0, null, new MobPushCallback<Boolean>() {
 					public void onCallback(Boolean result) {
 						if(!result) {

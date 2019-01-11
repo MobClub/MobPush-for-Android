@@ -2,30 +2,42 @@
     package="com.mob.demo.mobpush">
 
     <application
+        android:name="com.mob.demo.mobpush.DemoApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:logo="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.Light.NoTitleBar">
+        <activity
+            android:name=".SplashActivity"
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data
                     android:host="com.mob.mobpush.linkhome"
                     android:scheme="mlink" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="${applicationId}.default.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
 
-        <activity android:name=".JumpActivity" />
+        <activity android:name=".JumpActivity">
+
+        </activity>
 
         <activity
             android:name=".LinkOneActivity"
@@ -37,10 +49,10 @@
                     android:host="com.mob.mobpush.linkone"
                     android:scheme="mlink" />
             </intent-filter>
+
         </activity>
 
-        <activity
-            android:name=".LinkTwoActivity">
+        <activity android:name=".LinkTwoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -49,5 +61,12 @@
                     android:scheme="mlink" />
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="firebase_messaging_auto_init_enabled"
+            android:value="false" />
+        <meta-data
+            android:name="firebase_analytics_collection_enabled"
+            android:value="false" />
     </application>
+
 </manifest>
