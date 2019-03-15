@@ -33,6 +33,11 @@ MobSDK {
 //                appKey "OPPO appKey"
 //                appSecret "OPPO appSecret"
 //            }
+			VIVO {
+                appId "11154"
+                appKey "0afbe1b7-b850-4d45-8cee-c57cceff652e"
+            }
+
         }
     }
 }
