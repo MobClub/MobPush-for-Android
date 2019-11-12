@@ -3,9 +3,10 @@
 buildscript {
     repositories {
         jcenter()
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.android.tools.build:gradle:3.4.1'
         // 注册MobSDK
         classpath 'com.mob.sdk:MobSDK:+'
 		// 注册google services 用于集成FCM，不集成FCM可不配置
@@ -16,6 +17,7 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        google()
     }
 }
 
@@ -25,17 +27,17 @@ task clean(type: Delete) {
 
 
 ext{
-    compileSdkVersion = 26
+    compileSdkVersion = 28
     buildToolsVersion = findBuildTools()
 
     minSdkVersion = 16
-    targetSdkVersion = 25
+    targetSdkVersion = 28
     versionCode = 1
     versionName = "1.0.0"
 }
 
 String findBuildTools() {
-    def sdkDir = System.env.ANDROID_HOME;
+    def sdkDir = System.env.ANDROID_HOME
     if(sdkDir == null) {
         def localProperties = new File(project.rootDir, "local.properties")
         if (localProperties.exists()) {
