@@ -1,8 +1,10 @@
 package com.mob.demo.mobpush;
 
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,8 +25,9 @@ public class PageLocal extends FakeActivity implements View.OnClickListener {
 	private TextView tvChooseThree;
 	private TextView tvChooseFour;
 	private TextView tvChooseFive;
-
 	private int currentChooseTime = 1;
+	private CheckBox cbDefault, cbBoom, cbTech, cbWarn;
+	private String soundName = "";
 
 	protected int onSetTheme(int resid, boolean atLaunch) {
 		return super.onSetTheme(android.R.style.Theme_Light_NoTitleBar, atLaunch);
@@ -61,6 +64,16 @@ public class PageLocal extends FakeActivity implements View.OnClickListener {
 		findViewById(R.id.tvChooseFive).setOnClickListener(this);
 		findViewById(R.id.tvChooseZero).setOnClickListener(this);
 		tvChooseOne.performClick();
+
+		cbDefault = findViewById(R.id.cb_default);
+		cbBoom = findViewById(R.id.cb_boom);
+		cbTech = findViewById(R.id.cb_tech);
+		cbWarn = findViewById(R.id.cb_warn);
+
+		cbDefault.setOnClickListener(this);
+		cbBoom.setOnClickListener(this);
+		cbTech.setOnClickListener(this);
+		cbWarn.setOnClickListener(this);
 	}
 
 	public void onClick(View v) {
@@ -68,11 +81,13 @@ public class PageLocal extends FakeActivity implements View.OnClickListener {
 		switch (vId) {
 			case R.id.ivBack: {
 				finish();
-			} break;
+			}
+			break;
 			case R.id.btnTest: {
 				String content = etContent.getText().toString();
 				if (TextUtils.isEmpty(content)) {
 					Toast.makeText(getContext(), R.string.toast_input_not_allowed_null, Toast.LENGTH_SHORT).show();
+//					new DialogShell(getContext()).autoDismissDialog(R.string.toast_input_not_allowed_null, null, 2);
 					return;
 				}
 				MobPushLocalNotification notification = new MobPushLocalNotification();
@@ -82,9 +97,12 @@ public class PageLocal extends FakeActivity implements View.OnClickListener {
 //				notification.setVoice(false);//可设置不进行声音提醒，默认声音、振动、指示灯
 				notification.setNotificationId(new Random().nextInt());
 				notification.setTimestamp(currentChooseTime * 60 * 1000 + System.currentTimeMillis());
+				notification.setNotifySound(soundName);
 				MobPush.addLocalNotification(notification);
+//				Toast.makeText(getContext(), activity.getString(R.string.toast_timing, currentChooseTime + "min"), Toast.LENGTH_SHORT).show();
 				new DialogShell(getContext()).autoDismissDialog(R.string.toast_timing, currentChooseTime + "min", 2);
-			} break;
+			}
+			break;
 			case R.id.tvChooseZero:
 			case R.id.tvChooseOne:
 			case R.id.tvChooseTwo:
@@ -106,7 +124,48 @@ public class PageLocal extends FakeActivity implements View.OnClickListener {
 				v.setSelected(true);
 				((TextView) v).setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_choose_red, 0);
 				currentChooseTime = (Integer) v.getTag();
-			} break;
+			}
+			break;
+
+			case R.id.cb_default:
+				resetCB();
+				cbDefault.setChecked(true);
+				cbDefault.setTextColor(Color.WHITE);
+				soundName = "";
+				break;
+
+			case R.id.cb_boom:
+				resetCB();
+				cbBoom.setChecked(true);
+				cbBoom.setTextColor(Color.WHITE);
+				soundName = "boom";
+				break;
+
+			case R.id.cb_tech:
+				resetCB();
+				cbTech.setChecked(true);
+				cbTech.setTextColor(Color.WHITE);
+				soundName = "tech";
+				break;
+
+			case R.id.cb_warn:
+				resetCB();
+				cbWarn.setChecked(true);
+				cbWarn.setTextColor(Color.WHITE);
+				soundName = "warn";
+				break;
 		}
+	}
+
+	private void resetCB() {
+		cbDefault.setChecked(false);
+		cbBoom.setChecked(false);
+		cbTech.setChecked(false);
+		cbWarn.setChecked(false);
+
+		cbDefault.setTextColor(Color.BLACK);
+		cbBoom.setTextColor(Color.BLACK);
+		cbTech.setTextColor(Color.BLACK);
+		cbWarn.setTextColor(Color.BLACK);
 	}
 }

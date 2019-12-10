@@ -1,160 +1,238 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="#FFFFFF"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    android:paddingBottom="8dp">
 
-    <include layout="@layout/title_bar"/>
+    <include layout="@layout/title_bar" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_margin="20dp"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="12dp"
+        android:layout_weight="1.2"
         android:lineSpacingMultiplier="1.2"
         android:text="@string/timing_tip"
         android:textColor="#a6a6b2"
-        android:textSize="12sp"/>
+        android:textSize="12sp" />
 
     <EditText
         android:id="@+id/etContent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_weight="2"
         android:background="@drawable/bg_input"
         android:gravity="top"
         android:hint="@string/inner_input_hint"
-        android:maxLines="100"
         android:maxLength="35"
+        android:maxLines="100"
         android:textColor="#333333"
         android:textColorHint="#6e6f78"
-        android:textSize="14sp"/>
+        android:textSize="14sp" />
 
 
     <TextView
         android:id="@+id/tvChooseOne"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_weight="1"
         android:drawableRight="@drawable/ic_choose"
         android:gravity="center_vertical"
         android:text="@string/timing_choose_one"
         android:textColor="@color/tv_timing_color"
-        android:textSize="14sp"/>
+        android:textSize="14sp" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:background="#E6E6EC"/>
+        android:background="#E6E6EC" />
 
     <TextView
         android:id="@+id/tvChooseTwo"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_weight="1"
         android:drawableRight="@drawable/ic_choose"
         android:gravity="center_vertical"
         android:text="@string/timing_choose_two"
         android:textColor="@color/tv_timing_color"
-        android:textSize="14sp"/>
+        android:textSize="14sp" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:background="#E6E6EC"/>
+        android:background="#E6E6EC" />
 
     <TextView
         android:id="@+id/tvChooseThree"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_weight="1"
         android:drawableRight="@drawable/ic_choose"
         android:gravity="center_vertical"
         android:text="@string/timing_choose_three"
         android:textColor="@color/tv_timing_color"
-        android:textSize="14sp"/>
+        android:textSize="14sp" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:background="#E6E6EC"/>
+        android:background="#E6E6EC" />
 
     <TextView
         android:id="@+id/tvChooseFour"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_weight="1"
         android:drawableRight="@drawable/ic_choose"
         android:gravity="center_vertical"
         android:text="@string/timing_choose_four"
         android:textColor="@color/tv_timing_color"
-        android:textSize="14sp"/>
+        android:textSize="14sp" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:background="#E6E6EC"/>
+        android:background="#E6E6EC" />
 
     <TextView
         android:id="@+id/tvChooseFive"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_weight="1"
         android:drawableRight="@drawable/ic_choose"
         android:gravity="center_vertical"
         android:text="@string/timing_choose_five"
         android:textColor="@color/tv_timing_color"
-        android:textSize="14sp"/>
+        android:textSize="14sp" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:background="#E6E6EC"/>
+        android:background="#E6E6EC" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:text="选择通知声音(需要开启提示音)：" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp">
+
+        <CheckBox
+            android:id="@+id/cb_default"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_check_local"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            android:text="默认提示音"
+            android:textSize="14sp" />
+
+        <CheckBox
+            android:id="@+id/cb_boom"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_check_local"
+            android:button="@null"
+            android:gravity="center"
+            android:text="爆炸音"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp">
+
+        <CheckBox
+            android:id="@+id/cb_tech"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_check_local"
+            android:button="@null"
+            android:gravity="center"
+            android:text="科技音"
+            android:textSize="14sp" />
+
+        <CheckBox
+            android:id="@+id/cb_warn"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_check_local"
+            android:button="@null"
+            android:gravity="center"
+            android:text="警告音"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_margin="20dp"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="12dp"
+        android:layout_weight="1.2"
         android:lineSpacingMultiplier="1.2"
         android:text="@string/timing_tip"
         android:textColor="#a6a6b2"
-        android:textSize="12sp"/>
+        android:textSize="12sp" />
 
     <Button
         android:id="@+id/btnTest"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
+        android:layout_weight="1"
         android:background="@drawable/bg_btn_timing"
         android:text="@string/btn_test"
         android:textColor="#FFFFFF"
-        android:textSize="16sp"/>
+        android:textSize="16sp" />
 </LinearLayout>

@@ -97,7 +97,7 @@ public class PageOpenAct extends FakeActivity implements View.OnClickListener {
 					e.printStackTrace();
 				}
 
-				SimulateRequest.sendPush(1, content, 0, null, openScheme, data.toString(), new MobPushCallback<Boolean>() {
+				SimulateRequest.sendPush(1, content, 0, null, null,openScheme, data.toString(), new MobPushCallback<Boolean>() {
 					public void onCallback(Boolean result) {
 						if (result) {
 							new DialogShell(getContext()).autoDismissDialog(R.string.toast_notify_open_act, null, 2);

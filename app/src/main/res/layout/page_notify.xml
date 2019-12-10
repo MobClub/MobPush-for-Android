@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="#FFFFFF"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
 
-    <include layout="@layout/title_bar"/>
+    <include layout="@layout/title_bar" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -14,7 +14,7 @@
         android:lineSpacingMultiplier="1.2"
         android:text="@string/notify_tip"
         android:textColor="#a6a6b2"
-        android:textSize="12sp"/>
+        android:textSize="12sp" />
 
     <EditText
         android:id="@+id/etContent"
@@ -25,21 +25,95 @@
         android:background="@drawable/bg_input"
         android:gravity="top"
         android:hint="@string/inner_input_hint"
-        android:maxLines="100"
         android:maxLength="35"
+        android:maxLines="100"
         android:textColor="#333333"
         android:textColorHint="#6e6f78"
-        android:textSize="14sp"/>
+        android:textSize="14sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:text="选择通知声音(需要开启提示音)：" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp">
+
+        <CheckBox
+            android:id="@+id/cb_default"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_check_notify"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            android:text="默认提示音"
+            android:textSize="14sp" />
+
+        <CheckBox
+            android:id="@+id/cb_boom"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_check_notify"
+            android:button="@null"
+            android:gravity="center"
+            android:text="爆炸音"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp">
+
+        <CheckBox
+            android:id="@+id/cb_tech"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_check_notify"
+            android:button="@null"
+            android:gravity="center"
+            android:text="科技音"
+            android:textSize="14sp" />
+
+        <CheckBox
+            android:id="@+id/cb_warn"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_check_notify"
+            android:button="@null"
+            android:gravity="center"
+            android:text="警告音"
+            android:textSize="14sp" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/btnTest"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="35dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="15dp"
         android:background="@drawable/bg_btn_notify"
         android:text="@string/btn_test"
         android:textColor="#FFFFFF"
-        android:textSize="16sp"/>
+        android:textSize="16sp" />
 </LinearLayout>

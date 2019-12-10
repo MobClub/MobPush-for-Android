@@ -1,8 +1,10 @@
 package com.mob.demo.mobpush;
 
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +22,8 @@ public class PageTiming extends FakeActivity implements View.OnClickListener {
 	private TextView tvChooseThree;
 	private TextView tvChooseFour;
 	private TextView tvChooseFive;
+	private CheckBox cbDefault, cbBoom, cbTech, cbWarn;
+	private String soundName = "";
 
 	private int currentChooseTime = 1;
 
@@ -56,6 +60,16 @@ public class PageTiming extends FakeActivity implements View.OnClickListener {
 		findViewById(R.id.tvChooseFive).setOnClickListener(this);
 
 		tvChooseOne.performClick();
+
+		cbDefault = findViewById(R.id.cb_default);
+		cbBoom = findViewById(R.id.cb_boom);
+		cbTech = findViewById(R.id.cb_tech);
+		cbWarn = findViewById(R.id.cb_warn);
+
+		cbDefault.setOnClickListener(this);
+		cbBoom.setOnClickListener(this);
+		cbTech.setOnClickListener(this);
+		cbWarn.setOnClickListener(this);
 	}
 
 	public void onClick(View v) {
@@ -63,25 +77,27 @@ public class PageTiming extends FakeActivity implements View.OnClickListener {
 		switch (vId) {
 			case R.id.ivBack: {
 				finish();
-			} break;
+			}
+			break;
 			case R.id.btnTest: {
 				String content = etContent.getText().toString();
 				if (TextUtils.isEmpty(content)) {
 					Toast.makeText(getContext(), R.string.toast_input_not_allowed_null, Toast.LENGTH_SHORT).show();
 					return;
 				}
-				SimulateRequest.sendPush(3, content, currentChooseTime, null, new MobPushCallback<Boolean>() {
+				SimulateRequest.sendPush(3, content, currentChooseTime, null, soundName, new MobPushCallback<Boolean>() {
 					public void onCallback(Boolean result) {
-						if(result) {
+						if (result) {
 							new DialogShell(getContext()).autoDismissDialog(R.string.toast_timing, currentChooseTime + "min", 2);
-						} else if(!NetWorkHelper.netWorkCanUse(null)){
+						} else if (!NetWorkHelper.netWorkCanUse(null)) {
 							new DialogShell(getContext()).autoDismissDialog(R.string.error_network, null, 2);
 						} else {
 							new DialogShell(getContext()).autoDismissDialog(R.string.error_ukonw, null, 2);
 						}
 					}
 				});
-			} break;
+			}
+			break;
 			case R.id.tvChooseOne:
 			case R.id.tvChooseTwo:
 			case R.id.tvChooseThree:
@@ -100,7 +116,48 @@ public class PageTiming extends FakeActivity implements View.OnClickListener {
 				v.setSelected(true);
 				((TextView) v).setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_choose, 0);
 				currentChooseTime = (Integer) v.getTag();
-			} break;
+			}
+			break;
+
+			case R.id.cb_default:
+				resetCB();
+				cbDefault.setChecked(true);
+				cbDefault.setTextColor(Color.WHITE);
+				soundName = "";
+				break;
+
+			case R.id.cb_boom:
+				resetCB();
+				cbBoom.setChecked(true);
+				cbBoom.setTextColor(Color.WHITE);
+				soundName = "boom";
+				break;
+
+			case R.id.cb_tech:
+				resetCB();
+				cbTech.setChecked(true);
+				cbTech.setTextColor(Color.WHITE);
+				soundName = "tech";
+				break;
+
+			case R.id.cb_warn:
+				resetCB();
+				cbWarn.setChecked(true);
+				cbWarn.setTextColor(Color.WHITE);
+				soundName = "warn";
+				break;
 		}
+	}
+
+	private void resetCB() {
+		cbDefault.setChecked(false);
+		cbBoom.setChecked(false);
+		cbTech.setChecked(false);
+		cbWarn.setChecked(false);
+
+		cbDefault.setTextColor(Color.BLACK);
+		cbBoom.setTextColor(Color.BLACK);
+		cbTech.setTextColor(Color.BLACK);
+		cbWarn.setTextColor(Color.BLACK);
 	}
 }

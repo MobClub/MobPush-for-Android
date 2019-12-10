@@ -2,6 +2,9 @@
 
 buildscript {
     repositories {
+        maven {
+            url "http://mvn.mob.com/android"
+        }
         jcenter()
         google()
     }
@@ -11,6 +14,10 @@ buildscript {
         classpath 'com.mob.sdk:MobSDK:+'
 		// 注册google services 用于集成FCM，不集成FCM可不配置
 		classpath 'com.google.gms:google-services:4.0.0'
+    }
+
+    configurations.all {
+        resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
     }
 }
 
