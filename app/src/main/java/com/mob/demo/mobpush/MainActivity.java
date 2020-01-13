@@ -32,7 +32,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 		MobPush.setAlias("oppo");
 
-		MobPush.addTags(new String[]{"push", "oppo"});
 
 		if (Build.VERSION.SDK_INT >= 21) {
 			MobPush.setNotifyIcon(R.mipmap.default_ic_launcher);
