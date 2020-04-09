@@ -4,42 +4,27 @@ apply plugin: 'com.mob.sdk'
 
 // 在MobSDK的扩展中注册MobPush的相关信息
 MobSDK {
-    appKey "moba6b6c6d6"
-    appSecret "b89d2427a3bc7ad1aea1e1e8c1d36bf3"
+    appKey "2dbe655e88c80"
+    appSecret "a7b9f1918c596eacbff8a172ba8ed158"
+
+    gui true
 
     MobPush {
+        debugLevel 4
         devInfo {
-            HUAWEI{
-                appId "100215127"
+            XIAOMI {
+                appId "2882303761518300242"
+                appKey "5581830029242"
             }
 
-            MEIZU{
-                appId "112481"
-                appKey "03dd70b9be434446a7255c8586e1725a"
+            HUAWEI {
+                appId "101595257"
             }
 
-            XIAOMI{
-                appId "2882303761517721670"
-                appKey "5671772162670"
+            VIVO {
+                appId "18568"
+                appKey "9b01729c-6140-4ad3-ac79-4c4543e12130"
             }
-
-            FCM{
-                //设置默认推送通知显示图标
-                iconRes "@mipmap/ic_launcher"
-            }
-
-            //此处OPPO的配置信息只是用来展示配置示例，不能用了测试OPPO通道推送，如需推送请替换成自己的正确应用信息
-//            OPPO{
-//                appKey "OPPO appKey"
-//                appSecret "OPPO appSecret"
-//            }
-			VIVO {
-                appId "11154"
-                appKey "0afbe1b7-b850-4d45-8cee-c57cceff652e"
-            }
-
         }
     }
 }
-
-apply plugin: 'com.google.gms.google-services'
