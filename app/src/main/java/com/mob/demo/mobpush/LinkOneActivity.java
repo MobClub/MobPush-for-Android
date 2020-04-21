@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Set;
+
 /**
  * scheme指定界面跳转目标页-指定界面1
  * 推送时通过scheme指定界面跳转，在AndroidManifest.xml文件中配置示例：
@@ -66,12 +68,15 @@ public class LinkOneActivity extends Activity implements View.OnClickListener {
 	private void initData() {
 		Intent intent = getIntent();
 		Uri uri = intent.getData();
+		if (intent != null) {
+			System.out.println("MobPush linkone intent---" + intent.toUri(Intent.URI_INTENT_SCHEME));
+		}
 		StringBuilder sb = new StringBuilder();
 		if (uri != null) {
 			sb.append(" scheme:" + uri.getScheme() + "\n");
 			sb.append(" host:" + uri.getHost() + "\n");
-//			sb.append(" port:" + uri.getPort() + "\n");
-//			sb.append(" query:" + uri.getQuery() + "\n");
+			sb.append(" port:" + uri.getPort() + "\n");
+			sb.append(" query:" + uri.getQuery() + "\n");
 		}
 
 		//获取link界面传输的数据，取字段data数据
@@ -79,6 +84,14 @@ public class LinkOneActivity extends Activity implements View.OnClickListener {
 		if (bundle != null && bundle.containsKey(MOB_PUSH_NORMAL_SCHEME_PLAYLOAD_KEY)) {
 			sb.append(" extras:" + (bundle.containsKey(MOB_PUSH_NORMAL_SCHEME_PLAYLOAD_KEY)
 					? bundle.get(MOB_PUSH_NORMAL_SCHEME_PLAYLOAD_KEY).toString() : ""));
+		}
+		if (bundle != null) {
+			sb.append("\n" + "bundle toString :" + bundle.toString());
+			Set<String> keySet = bundle.keySet();
+			for (String key : keySet) {
+				System.out.println("MobPush linkone bundle------------->" + key);
+				System.out.println("MobPush linkone bundle------------->" + bundle.get(key));
+			}
 		}
 		tv.setText(sb);
 	}

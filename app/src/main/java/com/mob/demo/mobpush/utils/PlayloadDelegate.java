@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.mob.demo.mobpush.web.WebViewPage;
@@ -30,133 +31,135 @@ import java.util.Set;
  * 配置了scheme，对于FCM通道来说也是不生效的，需自行在代码中通过[mobpush_link_k]来获取scheme处理跳转，如果同时携带了scheme的附加数据则需通过[mobpush_link_v]获取数据
  */
 public class PlayloadDelegate {
-	//固定推送附加字段:
-	private final static String MOB_PUSH_SCHEME_KEY = "mobpush_link_k";
-	private final static String MOB_PUSH_SCHEME_PLAYLOAD_KEY = "mobpush_link_v";
-	private final static String MOB_PUSH_OPPO_EXTRA_DATA = "pluginExtra";
-	private final static String MOB_PUSH_NORMAL_PLAYLOAD_KEY = "msg";
-	private final static String MOB_PUSH_NORMAL_SCHEME_PLAYLOAD_KEY = "data";
+    //固定推送附加字段:
+    private final static String MOB_PUSH_SCHEME_KEY = "mobpush_link_k";
+    private final static String MOB_PUSH_SCHEME_PLAYLOAD_KEY = "mobpush_link_v";
+    private final static String MOB_PUSH_OPPO_EXTRA_DATA = "pluginExtra";
+    private final static String MOB_PUSH_NORMAL_PLAYLOAD_KEY = "msg";
+    private final static String MOB_PUSH_NORMAL_SCHEME_PLAYLOAD_KEY = "data";
 
-	//如果是从后台的扩展参数传，则可以随意定义:
-	private final static String MOB_PUSH_DEMO_URL = "url";
+    //如果是从后台的扩展参数传，则可以随意定义:
+    private final static String MOB_PUSH_DEMO_URL = "url";
 
-	public void playload(Context context, Bundle bundle) {
-		if (bundle == null) {
-			return;
-		}
+    public void playload(Context context, Bundle bundle) {
+        if (bundle == null) {
+            return;
+        }
 
-		Set<String> keySet = bundle.keySet();
+        try {
+            Set<String> keySet = bundle.keySet();
+            if (keySet == null || keySet.isEmpty()) {
+                return;
+            }
+            HashMap<String, Object> map = new HashMap<String, Object>();
+            for (String key : keySet) {
+                System.out.println("MobPush playload bundle------------->" + key);
+                System.out.println("MobPush playload bundle------------->" + bundle.get(key));
 
-		if (keySet == null || keySet.isEmpty()) {
-			return;
-		}
+                if (key.equals(MOB_PUSH_OPPO_EXTRA_DATA)) {
 
-		HashMap<String, Object> map = new HashMap<String, Object>();
+                    map = parseOPPOPlayload(bundle);
 
-		for (String key : keySet) {
-			if (key.equals(MOB_PUSH_OPPO_EXTRA_DATA)) {
+                } else if (key.equals(MOB_PUSH_NORMAL_PLAYLOAD_KEY)) {
 
-				map = parseOPPOPlayload(bundle);
+                    map = parseNormalPlayload(bundle);
 
-			} else if (key.equals(MOB_PUSH_NORMAL_PLAYLOAD_KEY)) {
+                } else {
+                    Object object = bundle.get(key);
+                    System.out.println(">>>>>>key: " + key + ", object: " + object);
+                    map.put(key, String.valueOf(object));
+                }
+            }
+            if (map != null && !map.isEmpty()) {
+                realPerform(context, map);
+            }
+        } catch (Throwable throwable) {
+            Log.e("MobPush", throwable.getMessage());
+        }
+    }
 
-				map = parseNormalPlayload(bundle);
+    private void realPerform(Context context, HashMap<String, Object> map) {
+        if (map == null) {
+            return;
+        }
+        String json = "";
 
-			} else {
-				Object object = bundle.get(key);
-				System.out.println(">>>>>>key: " + key + ", object: " + object);
-				map.put(key, String.valueOf(object));
-			}
-		}
+        Set<String> keys = map.keySet();
+        for (String key : keys) {
+            System.out.println(">>>>>>>>>>all key: " + key + ", value: " + map.get(key));
+        }
 
-		if (map != null && !map.isEmpty()) {
-			realPerform(context, map);
-		}
+        if (keys != null && keys.size() == 1 && (keys.contains("profile") || keys.contains("workId"))) {
+            return;
+        }
 
-	}
+        for (String key : keys) {
+            if (!"profile".equals(key) && !"workId".equals(key)
+                    && !"collapse_key".equals(key) && !key.startsWith("google.") && !"from".equals(key)) {
+                json += "key: " + key + ", value: " + map.get(key) + "\n";
+            }
+        }
+        Toast.makeText(context, json, Toast.LENGTH_SHORT).show();
 
-	private void realPerform(Context context, HashMap<String, Object> map) {
-		if (map == null) {
-			return;
-		}
-		String json = "";
+        //通过配置scheme跳转指定界面则需使用固定的key来获取相关数据
+        if (map.containsKey(MOB_PUSH_SCHEME_KEY)) {
+            openAct(context, map);
+        } else {
+            //处理其他自定义数据的业务逻辑，例如打开网页：通过自定义的key来获取对应的数据
+            if (map.containsKey(MOB_PUSH_DEMO_URL)) {
+                openUrl(context, map);
+            } else if (map.containsKey(MOB_PUSH_NORMAL_SCHEME_PLAYLOAD_KEY)) {
+                System.out.println(">>>>>>>>>>scheme Activity with playload data: " + MOB_PUSH_NORMAL_SCHEME_PLAYLOAD_KEY + ", value: " + map.get(MOB_PUSH_NORMAL_SCHEME_PLAYLOAD_KEY));
+            } else {
 
-		Set<String> keys = map.keySet();
-		for (String key : keys) {
-			System.out.println(">>>>>>>>>>all key: " + key + ", value: " + map.get(key));
-		}
+            }
+        }
+    }
 
-		if (keys != null && keys.size() == 1 && (keys.contains("profile") || keys.contains("workId"))) {
-			return;
-		}
+    private HashMap<String, Object> parseOPPOPlayload(Bundle bundle) {
+        HashMap hashMap = null;
+        String v = String.valueOf(bundle.get(MOB_PUSH_OPPO_EXTRA_DATA));
+        if (!TextUtils.isEmpty(v)) {
+            hashMap = new Hashon().fromJson(v);
+        }
+        return hashMap;
+    }
 
-		for (String key : keys) {
-			if (!"profile".equals(key) && !"workId".equals(key)
-					&& !"collapse_key".equals(key) && !key.startsWith("google.") && !"from".equals(key)) {
-				json += "key: " + key + ", value: " + map.get(key) + "\n";
-			}
-		}
-		Toast.makeText(context, json, Toast.LENGTH_SHORT).show();
+    private HashMap<String, Object> parseNormalPlayload(Bundle bundle) {
+        HashMap hashMap = null;
+        MobPushNotifyMessage notifyMessage = (MobPushNotifyMessage) bundle.getSerializable(MOB_PUSH_NORMAL_PLAYLOAD_KEY);
+        if (notifyMessage != null) {
+            hashMap = notifyMessage.getExtrasMap();
+        }
+        return hashMap;
+    }
 
-		//通过配置scheme跳转指定界面则需使用固定的key来获取相关数据
-		if (map.containsKey(MOB_PUSH_SCHEME_KEY)) {
-			openAct(context, map);
-		} else {
-			//处理其他自定义数据的业务逻辑，例如打开网页：通过自定义的key来获取对应的数据
-			if (map.containsKey(MOB_PUSH_DEMO_URL)) {
-				openUrl(context, map);
-			} else if (map.containsKey(MOB_PUSH_NORMAL_SCHEME_PLAYLOAD_KEY)) {
-				System.out.println(">>>>>>>>>>scheme Activity with playload data: " + MOB_PUSH_NORMAL_SCHEME_PLAYLOAD_KEY + ", value: " + map.get(MOB_PUSH_NORMAL_SCHEME_PLAYLOAD_KEY));
-			} else {
+    private void openUrl(Context context, HashMap<String, Object> params) {
+        String url;
+        if (!TextUtils.isEmpty((CharSequence) params.get(MOB_PUSH_DEMO_URL))) {
+            url = (String) params.get(MOB_PUSH_DEMO_URL);
+        } else {
+            url = "http://m.mob.com";
+        }
+        if (!url.startsWith("http://") && !url.startsWith("https://")) {
+            url = "http://" + url;
+        }
+        System.out.println("url:" + url);
+        WebViewPage webViewPage = new WebViewPage();
+        webViewPage.setJumpUrl(url);
+        webViewPage.show(context, null);
+    }
 
-			}
-		}
-	}
-
-	private HashMap<String, Object> parseOPPOPlayload(Bundle bundle) {
-		HashMap hashMap = null;
-		String v = String.valueOf(bundle.get(MOB_PUSH_OPPO_EXTRA_DATA));
-		if (!TextUtils.isEmpty(v)) {
-			hashMap = new Hashon().fromJson(v);
-		}
-		return hashMap;
-	}
-
-	private HashMap<String, Object> parseNormalPlayload(Bundle bundle) {
-		HashMap hashMap = null;
-		MobPushNotifyMessage notifyMessage = (MobPushNotifyMessage) bundle.getSerializable(MOB_PUSH_NORMAL_PLAYLOAD_KEY);
-		if (notifyMessage != null) {
-			hashMap = notifyMessage.getExtrasMap();
-		}
-		return hashMap;
-	}
-
-	private void openUrl(Context context, HashMap<String, Object> params) {
-		String url;
-		if (!TextUtils.isEmpty((CharSequence) params.get(MOB_PUSH_DEMO_URL))) {
-			url = (String) params.get(MOB_PUSH_DEMO_URL);
-		} else {
-			url = "http://m.mob.com";
-		}
-		if (!url.startsWith("http://") && !url.startsWith("https://")) {
-			url = "http://" + url;
-		}
-		System.out.println("url:" + url);
-		WebViewPage webViewPage = new WebViewPage();
-		webViewPage.setJumpUrl(url);
-		webViewPage.show(context, null);
-	}
-
-	private void openAct(Context context, HashMap<String, Object> params) {
-		String uri = params.containsKey(MOB_PUSH_SCHEME_KEY) ? (String) params.get(MOB_PUSH_SCHEME_KEY) : "";
-		if (TextUtils.isEmpty(uri)) {
-			return;
-		}
-		Intent intent = new Intent(null, Uri.parse(uri));
-		if (params.containsKey(MOB_PUSH_SCHEME_PLAYLOAD_KEY) && params.get(MOB_PUSH_SCHEME_PLAYLOAD_KEY) != null) {
-			intent.putExtra("data", (String) params.get(MOB_PUSH_SCHEME_PLAYLOAD_KEY));
-		}
-		context.startActivity(intent);
-	}
+    private void openAct(Context context, HashMap<String, Object> params) {
+        String uri = params.containsKey(MOB_PUSH_SCHEME_KEY) ? (String) params.get(MOB_PUSH_SCHEME_KEY) : "";
+        if (TextUtils.isEmpty(uri)) {
+            return;
+        }
+        Intent intent = new Intent(null, Uri.parse(uri));
+        if (params.containsKey(MOB_PUSH_SCHEME_PLAYLOAD_KEY) && params.get(MOB_PUSH_SCHEME_PLAYLOAD_KEY) != null) {
+            intent.putExtra("data", (String) params.get(MOB_PUSH_SCHEME_PLAYLOAD_KEY));
+        }
+        context.startActivity(intent);
+    }
 
 }

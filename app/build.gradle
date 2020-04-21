@@ -21,6 +21,21 @@ MobSDK {
                 appId "101595257"
             }
 
+            MEIZU {
+                appId "127372"
+                appKey "3fc6d1acc7ea4f90a0304967ee3a74ae"
+            }
+
+            FCM {
+                //设置默认推送通知显示图标
+                iconRes "@mipmap/default_ic_launcher"
+            }
+
+            OPPO {
+                appKey "6303014506164557acc69df6ef14300b"
+                appSecret "c850609d8a0f492f8b9eeca1189aaec2"
+            }
+
             VIVO {
                 appId "18568"
                 appKey "9b01729c-6140-4ad3-ac79-4c4543e12130"
@@ -28,3 +43,5 @@ MobSDK {
         }
     }
 }
+
+apply plugin: 'com.google.gms.google-services'
