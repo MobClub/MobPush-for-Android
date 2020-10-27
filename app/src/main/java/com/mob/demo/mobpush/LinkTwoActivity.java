@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.mob.pushsdk.MobPushUtils;
+
+import org.json.JSONArray;
+
 /**
  * scheme指定界面跳转目标页-指定界面2
  * 推送时通过scheme指定界面跳转，在AndroidManifest.xml文件中配置示例：
@@ -61,15 +65,14 @@ public class LinkTwoActivity extends Activity implements View.OnClickListener {
 		if (uri != null) {
 			sb.append(" scheme:" + uri.getScheme() + "\n");
 			sb.append(" host:" + uri.getHost() + "\n");
-//			sb.append(" port:" + uri.getPort() + "\n");
-//			sb.append(" query:" + uri.getQuery() + "\n");
+			sb.append(" port:" + uri.getPort() + "\n");
+			sb.append(" query:" + uri.getQuery() + "\n");
 		}
 
-		//获取link界面传输的数据，取字段data数据
-		Bundle bundle = intent.getExtras();
-		if (bundle != null && bundle.containsKey(MOB_PUSH_NORMAL_SCHEME_PLAYLOAD_KEY)) {
-			sb.append(" extras:" + (bundle.containsKey(MOB_PUSH_NORMAL_SCHEME_PLAYLOAD_KEY)
-					? bundle.get(MOB_PUSH_NORMAL_SCHEME_PLAYLOAD_KEY).toString() : ""));
+		//获取link界面传输的数据
+		JSONArray jsonArray = MobPushUtils.parseSchemePluginPushIntent(intent);
+		if (jsonArray != null) {
+			sb.append("\n" + "bundle toString :" + jsonArray.toString());
 		}
 		tv.setText(sb);
 	}

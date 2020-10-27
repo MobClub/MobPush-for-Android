@@ -30,6 +30,7 @@ import java.util.Set;
  * 3>FCM通道： 默认落地页和配置scheme指定页都是打开默认启动页（google 服务控制打开默认启动页），而且附加字段完全暴露在从Intent的getExtras的Bundle中，
  * 配置了scheme，对于FCM通道来说也是不生效的，需自行在代码中通过[mobpush_link_k]来获取scheme处理跳转，如果同时携带了scheme的附加数据则需通过[mobpush_link_v]获取数据
  */
+@Deprecated
 public class PlayloadDelegate {
     //固定推送附加字段:
     private final static String MOB_PUSH_SCHEME_KEY = "mobpush_link_k";

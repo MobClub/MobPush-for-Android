@@ -8,6 +8,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.mob.pushsdk.MobPush;
+import com.mob.pushsdk.MobPushUtils;
+
+import org.json.JSONArray;
+
 import java.util.Set;
 
 /**
@@ -79,19 +84,10 @@ public class LinkOneActivity extends Activity implements View.OnClickListener {
 			sb.append(" query:" + uri.getQuery() + "\n");
 		}
 
-		//获取link界面传输的数据，取字段data数据
-		Bundle bundle = intent.getExtras();
-		if (bundle != null && bundle.containsKey(MOB_PUSH_NORMAL_SCHEME_PLAYLOAD_KEY)) {
-			sb.append(" extras:" + (bundle.containsKey(MOB_PUSH_NORMAL_SCHEME_PLAYLOAD_KEY)
-					? bundle.get(MOB_PUSH_NORMAL_SCHEME_PLAYLOAD_KEY).toString() : ""));
-		}
-		if (bundle != null) {
-			sb.append("\n" + "bundle toString :" + bundle.toString());
-			Set<String> keySet = bundle.keySet();
-			for (String key : keySet) {
-				System.out.println("MobPush linkone bundle------------->" + key);
-				System.out.println("MobPush linkone bundle------------->" + bundle.get(key));
-			}
+		//获取link界面传输的数据
+		JSONArray jsonArray = MobPushUtils.parseSchemePluginPushIntent(intent);
+		if (jsonArray != null){
+			sb.append("\n" + "bundle toString :" + jsonArray.toString());
 		}
 		tv.setText(sb);
 	}
