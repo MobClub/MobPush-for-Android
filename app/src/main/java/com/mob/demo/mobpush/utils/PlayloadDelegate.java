@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.mob.demo.mobpush.web.WebViewPage;
 import com.mob.pushsdk.MobPushNotifyMessage;
@@ -100,7 +99,6 @@ public class PlayloadDelegate {
                 json += "key: " + key + ", value: " + map.get(key) + "\n";
             }
         }
-        Toast.makeText(context, json, Toast.LENGTH_SHORT).show();
 
         //通过配置scheme跳转指定界面则需使用固定的key来获取相关数据
         if (map.containsKey(MOB_PUSH_SCHEME_KEY)) {

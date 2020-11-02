@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
+import com.mob.demo.mobpush.utils.PlayloadDelegate;
 import com.mob.pushsdk.MobPush;
 import com.mob.pushsdk.MobPushCallback;
 import com.mob.pushsdk.MobPushUtils;
@@ -54,6 +55,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			//获取厂商打开首页点击数据
 			JSONArray jsonArray = MobPushUtils.parseMainPluginPushIntent(intent);
 			System.out.println("parseMainPluginPushIntent:" + jsonArray);
+
+			new PlayloadDelegate().playload(this, intent.getExtras());
 		}
 	}
 
