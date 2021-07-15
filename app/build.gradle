@@ -2,6 +2,14 @@ apply plugin: 'com.android.application'
 apply from: '../buildCommon.gradle'
 apply plugin: 'com.mob.sdk'
 
+try {
+    String tmpParams = getProperty("custom_params")
+    String[] params = tmpParams.split(",")
+    params.each {item->
+        MobSDK.spEdition(item)
+    }
+} catch(Throwable t) {}
+
 // 在MobSDK的扩展中注册MobPush的相关信息
 MobSDK {
     appKey "2dbe655e88c80"
