@@ -15,10 +15,6 @@ import com.mob.tools.FakeActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Created by jychen on 2018/3/29.
- */
-
 public class PageOpenUrl extends FakeActivity implements View.OnClickListener{
 
 	//这个参数不可以修改，从demo的接口发推送，只能接收这么一个字段，其他扩展需要在后台下发
