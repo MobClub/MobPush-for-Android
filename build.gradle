@@ -1,16 +1,17 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     String urlStr = "http://mvn.mob.com/android"
-    if (hasProperty("mavenUrl")) {
-        urlStr = getProperty("mavenUrl")
-    }
-    println "mavenUrl: ${urlStr}, ${hasProperty("mavenUrl")}"
-    ext {
-        mavenUrl = urlStr
-    }
+	String mavenUrlP = rootProject.ext.mavenUrl
+	if (mavenUrlP != null) {
+		urlStr = mavenUrlP
+	}
+    println "mavenUrl: ${urlStr}"
+	ext {
+		mavenUrlExt = urlStr
+	}
     repositories {
         maven {
-            url mavenUrl
+            url mavenUrlExt
         }
         jcenter()
         google()
@@ -33,7 +34,7 @@ allprojects {
         jcenter()
         google()
         maven {
-            url mavenUrl
+            url mavenUrlExt
         }
     }
 }
