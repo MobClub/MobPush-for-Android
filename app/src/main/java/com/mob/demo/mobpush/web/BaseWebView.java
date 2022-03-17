@@ -37,7 +37,6 @@ public class BaseWebView extends WebView {
 		setVerticalScrollBarEnabled(false);
 		setHorizontalScrollBarEnabled(false);
 		settings.setAppCacheEnabled(false);
-//		settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 			getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
 		}

@@ -28,11 +28,6 @@ import android.widget.Toast;
 import com.mob.demo.mobpush.utils.SizeHelper;
 import com.mob.tools.FakeActivity;
 import com.mob.tools.utils.ResHelper;
-
-/**
- * Created by yychen on 2017/11/2.
- */
-
 public class WebViewPage extends FakeActivity {
 
 	private LinearLayout mainlayout;

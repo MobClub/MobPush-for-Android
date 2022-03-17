@@ -87,19 +87,16 @@ public class PageLocal extends FakeActivity implements View.OnClickListener {
 				String content = etContent.getText().toString();
 				if (TextUtils.isEmpty(content)) {
 					Toast.makeText(getContext(), R.string.toast_input_not_allowed_null, Toast.LENGTH_SHORT).show();
-//					new DialogShell(getContext()).autoDismissDialog(R.string.toast_input_not_allowed_null, null, 2);
 					return;
 				}
 				MobPushLocalNotification notification = new MobPushLocalNotification();
 				String appName = DeviceHelper.getInstance(getContext()).getAppName();
 				notification.setTitle(TextUtils.isEmpty(appName) ? getContext().getString(R.string.item_local) : appName);
 				notification.setContent(content);
-//				notification.setVoice(false);//可设置不进行声音提醒，默认声音、振动、指示灯
 				notification.setNotificationId(new Random().nextInt());
 				notification.setTimestamp(currentChooseTime * 60 * 1000 + System.currentTimeMillis());
 				notification.setNotifySound(soundName);
 				MobPush.addLocalNotification(notification);
-//				Toast.makeText(getContext(), activity.getString(R.string.toast_timing, currentChooseTime + "min"), Toast.LENGTH_SHORT).show();
 				new DialogShell(getContext()).autoDismissDialog(R.string.toast_timing, currentChooseTime + "min", 2);
 			}
 			break;

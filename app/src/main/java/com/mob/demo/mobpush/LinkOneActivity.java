@@ -37,8 +37,6 @@ import java.util.Set;
  * 而FCM（应用非前台情况下）、OPPO通道的特殊性，无法进行默认处理，需在启动页中获取附加字段单独处理界面跳转和附加数据的传入。
  */
 public class LinkOneActivity extends Activity implements View.OnClickListener {
-	private final static String MOB_PUSH_NORMAL_SCHEME_PLAYLOAD_KEY = "data";
-
 	private TextView tvTitle;
 	private ImageView ivBack;
 	private TextView tv;

@@ -9,11 +9,6 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 import java.util.Set;
-
-/**
- * Created by jychen on 2018/4/4.
- */
-
 public class JumpActivity extends Activity {
 
 	private LinearLayout mainLayout;
