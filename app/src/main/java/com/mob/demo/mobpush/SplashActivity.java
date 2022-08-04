@@ -50,7 +50,6 @@ public class SplashActivity extends Activity {
 			//获取厂商打开首页点击数据
 			JSONArray jsonArray = MobPushUtils.parseMainPluginPushIntent(intent);
 			if (jsonArray.length() > 0) {
-				Toast.makeText(MobSDK.getContext(), "点击数据：\n" + jsonArray.toString(), Toast.LENGTH_LONG).show();
 				System.out.println("parseMainPluginPushIntent:" + jsonArray);
 			}
 		}
