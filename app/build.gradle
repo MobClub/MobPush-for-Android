@@ -41,12 +41,12 @@ MobSDK {
 
             FCM {
                 //设置默认推送通知显示图标
-                version "20.2.0"
+                version "23.0.7"
                 iconRes "@mipmap/default_ic_launcher"
             }
 
             OPPO {
-//                version '3.1.0'
+                version '3.1.0'
                 appKey "6303014506164557acc69df6ef14300b"
                 appSecret "c850609d8a0f492f8b9eeca1189aaec2"
             }
@@ -63,7 +63,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.6.2'
     implementation 'commons-codec:commons-codec:1.6'
     implementation 'androidx.annotation:annotation:1.1.0'
-
+    implementation fileTree(dir: 'libs', includes: ['*.aar', '*.jar'])
 }
 
 apply plugin: 'com.google.gms.google-services'
