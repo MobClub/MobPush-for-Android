@@ -4,6 +4,8 @@ android {
 
     defaultConfig {
         applicationId "com.mob.mobpush.demo"
+        //天天日记包名 测试小米厂商推送使用
+//        applicationId "cn.yoozoo.mob.DayDay"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
