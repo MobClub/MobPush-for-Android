@@ -21,12 +21,17 @@ MobSDK {
         debugLevel 4
         devInfo {
             XIAOMI {
-                appId "2882303761518300242"
-                appKey "5581830029242"
+                //天天日记appid
+                appId "2882303761518360245"
+                appKey "5501836067245"
+                //mobpushdemo appid
+//                appId "2882303761518300242"
+//                appKey "5581830029242"
             }
 
             HUAWEI {
                 appId "101595257"
+                version "6.5.0.300"
             }
 
             MEIZU {
@@ -36,11 +41,12 @@ MobSDK {
 
             FCM {
                 //设置默认推送通知显示图标
+                version "23.0.7"
                 iconRes "@mipmap/default_ic_launcher"
-                version "20.2.0"
             }
 
             OPPO {
+                version '3.1.0'
                 appKey "6303014506164557acc69df6ef14300b"
                 appSecret "c850609d8a0f492f8b9eeca1189aaec2"
             }
@@ -51,6 +57,13 @@ MobSDK {
             }
         }
     }
+}
+dependencies {
+    //oppo厂商推送 3.0+ 需要
+    implementation 'com.google.code.gson:gson:2.6.2'
+    implementation 'commons-codec:commons-codec:1.6'
+    implementation 'androidx.annotation:annotation:1.1.0'
+
 }
 
 apply plugin: 'com.google.gms.google-services'
