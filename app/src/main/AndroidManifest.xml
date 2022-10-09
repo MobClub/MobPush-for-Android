@@ -68,6 +68,18 @@
         <meta-data
             android:name="firebase_analytics_collection_enabled"
             android:value="false" />
+
+        <service
+            android:name="com.mob.pushsdk.plugins.honor.HonorPushService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.hihonor.push.action.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.hihonor.push.app_id"
+            android:value="220949336" />
     </application>
 
 </manifest>
