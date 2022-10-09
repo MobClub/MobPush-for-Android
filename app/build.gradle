@@ -41,7 +41,7 @@ MobSDK {
 
             FCM {
                 //设置默认推送通知显示图标
-                version "23.0.7"
+                version "20.2.0"
                 iconRes "@mipmap/default_ic_launcher"
             }
 
