@@ -46,7 +46,7 @@ MobSDK {
             }
 
             OPPO {
-                version '3.1.0'
+//                version '3.1.0'
                 appKey "6303014506164557acc69df6ef14300b"
                 appSecret "c850609d8a0f492f8b9eeca1189aaec2"
             }
