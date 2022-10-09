@@ -1,6 +1,6 @@
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion '32.0.0'
+    buildToolsVersion '30.0.0'
 
     defaultConfig {
         applicationId "com.mob.mobpush.demo"
