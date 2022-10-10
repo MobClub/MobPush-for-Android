@@ -18,6 +18,7 @@ MobSDK {
     gui true
 
     MobPush {
+        version '4.5.0'
         debugLevel 4
         devInfo {
             XIAOMI {
