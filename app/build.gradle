@@ -18,16 +18,11 @@ MobSDK {
     gui true
 
     MobPush {
-        version '4.5.0'
         debugLevel 4
         devInfo {
             XIAOMI {
-                //天天日记appid
-                appId "2882303761518360245"
-                appKey "5501836067245"
-                //mobpushdemo appid
-//                appId "2882303761518300242"
-//                appKey "5581830029242"
+                appId "2882303761518300242"
+                appKey "5581830029242"
             }
 
             HUAWEI {
@@ -55,6 +50,9 @@ MobSDK {
             VIVO {
                 appId "18568"
                 appKey "9b01729c-6140-4ad3-ac79-4c4543e12130"
+            }
+            HONOR {
+                appId '220949336'
             }
         }
     }
