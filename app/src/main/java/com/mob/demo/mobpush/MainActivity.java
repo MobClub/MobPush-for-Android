@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.mob.demo.mobpush.utils.PlayloadDelegate;
+import com.mob.demo.mobpush.utils.PrivacyDialogUtils;
 import com.mob.pushsdk.MobPush;
 import com.mob.pushsdk.MobPushCallback;
 import com.mob.pushsdk.MobPushUtils;
@@ -18,6 +19,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		new PrivacyDialogUtils().showPrivacyDialogIfNeed(this);
 		findViewById(R.id.llAppNotify).setOnClickListener(this);
 		findViewById(R.id.llNotify).setOnClickListener(this);
 		findViewById(R.id.llTiming).setOnClickListener(this);

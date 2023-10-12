@@ -23,7 +23,6 @@ public class DemoApplication extends MobApplication {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		submitPolicyGrantResult();
 		MobPush.addPushReceiver(new MobPushReceiver() {
 			@Override
 			public void onCustomMessageReceive(Context context, MobPushCustomMessage message) {
@@ -75,29 +74,6 @@ public class DemoApplication extends MobApplication {
 				return false;
 			}
 		});
-	}
-
-	private void submitPolicyGrantResult() {
-		Executors.newSingleThreadExecutor().execute(new Runnable() {
-			@Override
-			public void run() {
-				if (MobSDK.isForb()) {
-					//同意隐私协议
-					MobSDK.submitPolicyGrantResult(true, new OperationCallback<Void>() {
-						@Override
-						public void onComplete(Void aVoid) {
-							Log.d("Mobpush", "submitPolicyGrantResult  onComplete");
-						}
-
-						@Override
-						public void onFailure(Throwable throwable) {
-							Log.d("Mobpush", "submitPolicyGrantResult  onFailure");
-						}
-					});
-				}
-			}
-		});
-
 	}
 
 }
